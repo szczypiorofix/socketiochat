@@ -1,21 +1,22 @@
-var app = require('express')();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
+const http = require('http');
+const url = require('url');
+const hostname = '127.0.0.1';
+const port = 8000;
 
-app.get('/', function(req, res){
-  res.sendFile(__dirname + '/public/index.html');
-});
+var mainUrl = '';
 
-io.on('connection', function(socket){
-  console.log('a user connected');
-  socket.on('disconnect', function(){
-    console.log('user disconnected');
+const server = http.createServer((request, response) => {
+  response.writeHead(200, {'Content-Type': 'text/plain'});
+  response.write('Hello NodeJS !\n');
+  
+  mainUrl = 'http://'+hostname+':' +port +request.url;
+  
+  response.write('You are in '+mainUrl +'\n');
+  
+  var u = url.parse(mainUrl, true);
+  console.log(u);
+
+  response.end();
+  }).listen(port, hostname, () => {
+      console.log(`Server running at http://${hostname}:${port}/`);
   });
-  socket.on('chat message', function(msg){
-    console.log('message: ' + msg);
-  });
-});
-
-http.listen(8000, function(){
-  console.log('listening on *:8000');
-});
