@@ -1,22 +1,18 @@
-const http = require('http');
-const url = require('url');
-const hostname = '127.0.0.1';
-const port = 8000;
+var app = require('express')();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+var port = 80;
 
-var mainUrl = '';
+app.get('/', function(req, res){
+  res.sendFile(__dirname + '/index.html');
+});
 
-const server = http.createServer((request, response) => {
-  response.writeHead(200, {'Content-Type': 'text/plain'});
-  response.write('Hello NodeJS !\n');
-  
-  mainUrl = 'http://'+hostname+':' +port +request.url;
-  
-  response.write('You are in '+mainUrl +'\n');
-  
-  var u = url.parse(mainUrl, true);
-  console.log(u);
-
-  response.end();
-  }).listen(port, hostname, () => {
-      console.log(`Server running at http://${hostname}:${port}/`);
+io.on('connection', function(socket){
+  socket.on('chat message', function(msg){
+    io.emit('chat message', msg);
   });
+});
+
+http.listen(port, function(){
+  console.log('listening on *:'+port);
+});
