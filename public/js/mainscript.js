@@ -26,6 +26,4 @@ $(function () {
     $('#messages-div-id').scrollTop($('#messages-div-id')[0].scrollHeight);
   });
 
-  
-  
 });
