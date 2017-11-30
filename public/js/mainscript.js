@@ -19,11 +19,31 @@ $(function () {
     $('#console-p').append(name+" is typing: ");
   });
 
-  socket.on('chat message', function(msg) {
-    $('#messages').append($('<li>').text(msg));
+  var showOnConsole = function(msg) {
     $('#console-p').append(msg+"<br>");
     $('#console-p').scrollTop($('#console-p')[0].scrollHeight);
+  };
+
+  socket.on('chat message', function(msg) {
+    $('#messages').append($('<li>').text(msg));    
     $('#messages-div-id').scrollTop($('#messages-div-id')[0].scrollHeight);
+    showOnConsole(msg);
   });
+
+  socket.on('new connection', function(msg) {
+    socket.emit('new user name', $('#message_name').val());
+  });
+
+  socket.on('new user name all', function(name) {
+    showOnConsole("New user connected: " +name);
+  });
+
+/*   socket.on('disconnect a user', function(msg) {
+    socket.emit('disconect particular user', $('#message_name').val());
+  });
+
+  socket.on('disconnect particular user name', function(name) {
+    showOnConsole("User " +name +" has disconnected.");
+  }) */
 
 });
