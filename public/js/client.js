@@ -30,20 +30,27 @@ $(function () {
     showOnConsole(msg);
   });
 
-  socket.on('new connection', function(msg) {
-    socket.emit('new user name', $('#message_name').val());
+  socket.on('new connection', function(id) {
+    showOnConsole('Welcome officer! Your ID: ' +id);
+    socket.emit('new user registered', {name: $('#message_name').val(), id: id});
   });
 
-  socket.on('new user name all', function(name) {
-    showOnConsole("New user connected: " +name);
+  socket.on('update users list', function(l) {
+    //showOnConsole('Users list updated!');
+    //console.log(l);
+    $('#users-list').text('');
+    l.forEach(e => {
+      $('#users-list').append($('<li>').text(e.name));
+      $('li').css('cursor', 'pointer')
+      
+          .click(function() {
+              window.location = $('a', '#').attr('href');
+              return false;
+          });
+    });
   });
 
-/*   socket.on('disconnect a user', function(msg) {
-    socket.emit('disconect particular user', $('#message_name').val());
+  socket.on('user disconnected', function(msg) {
+    showOnConsole(msg);
   });
-
-  socket.on('disconnect particular user name', function(name) {
-    showOnConsole("User " +name +" has disconnected.");
-  }) */
-
 });

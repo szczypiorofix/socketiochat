@@ -26,6 +26,7 @@ form {
     margin: 3px;
     height: ~"calc(100% - 30px)";
     width: 100%;
+    border: 1px solid gray;
     h3 {
         text-align: center;
     }
@@ -61,7 +62,8 @@ form #message_input {
     margin: 0;
     padding: 0;
     float: left;
-    border: 1px solid gray;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
 }
 
 #names {
@@ -70,20 +72,56 @@ form #message_input {
     margin: 0;
     padding: 0;
     float: left;
-    border: 1px solid gray;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
 }
 
 #messages li, #names li {
     padding: 5px 10px;
+    background-color: #444;
+    color: #eeefff;
+    word-wrap: break-word;
+}
+
+#messages li:nth-child(odd) {
+    background: #555;
+    color: #dddeee;
+}
+
+#names li:nth-child(odd) {
+    background: #555;
+    color: #dddeee;
 }
 
 .messages-div {
     background-color: #444;
+    border: 1px solid gray;
     color: #eee;
-    overflow-y: scroll;
+    width: 80%;
+    float: left;
+    overflow-y: auto;
     height: ~"calc(100% - 210px)";
     min-height: ~"calc(100% - 210px)";
     max-height: ~"calc(100% - 210px)";
+}
+
+.user-list-div {
+    border: 1px solid gray;
+    width: 20%;
+    float:left;
+    overflow-y: auto;
+    overflow-x: auto;
+    height: ~"calc(100% - 210px)";
+    min-height: ~"calc(100% - 210px)";
+    max-height: ~"calc(100% - 210px)";
+    list-style-type: none;
+}
+
+#users-list {
+    list-style-type: none;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    padding: 5px;
 }
 
 .console-div {
