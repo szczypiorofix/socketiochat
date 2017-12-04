@@ -25,7 +25,8 @@ form {
   width: 100%;
   border: 1px solid gray;
 }
-.main-div h3 {
+.main-div h3,
+.main-div h2 {
   text-align: center;
 }
 form #message_name {
