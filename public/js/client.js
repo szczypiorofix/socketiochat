@@ -8,10 +8,16 @@ $('#message_input').focus();
 $(function () {
   
   var socket = io.connect('http://localhost:8000');
+  
+  
+  var showOnConsole = function(msg) {
+    $('#console-p').append(msg+"<br>");
+    $('#console-p').scrollTop($('#console-p')[0].scrollHeight);
+  };
 
   $('form').submit(function() {
-    socket.emit('chat name', $('#message_name').val());
-    socket.emit('chat message', $('#message_input').val());
+    socket.emit('chat send name', $('#message_name').val());
+    socket.emit('chat send message', $('#message_input').val());
     $('#message_input').val('');
     return false;
   });
@@ -20,11 +26,6 @@ $(function () {
     $('#names').append($('<li>').text(name));
     $('#console-p').append(name+" is typing: ");
   });
-
-  var showOnConsole = function(msg) {
-    $('#console-p').append(msg+"<br>");
-    $('#console-p').scrollTop($('#console-p')[0].scrollHeight);
-  };
 
   socket.on('chat message', function(msg) {
     $('#messages').append($('<li>').text(msg));    
@@ -37,18 +38,12 @@ $(function () {
     socket.emit('new user registered', {name: $('#message_name').val(), id: id});
   });
 
-  socket.on('update users list', function(l) {
-    //showOnConsole('Users list updated!');
-    //console.log(l);
-    $('#users-list').text('');
-    l.forEach(e => {
-      $('#users-list').append($('<li>').text(e.name));
-      $('li').css('cursor', 'pointer')
-      
-          .click(function() {
-              window.location = $('a', '#').attr('href');
-              return false;
-          });
+  socket.on('update list', function(user) {
+    if (user.newuser) showOnConsole('New user joined! '+user.name);
+    $('#users-list').html('');
+    user.list.forEach(e => {
+      document.getElementById('users-list').innerHTML 
+        += ('<li style="cursor:pointer" onclick="document.getElementById(\'message_input\').value = \'/'+e.name+': \'">' + e.name +'</li>');
     });
   });
 

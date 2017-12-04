@@ -41,6 +41,7 @@ form button[type="submit"] {
   background: #82e0ff;
   border: none;
   float: left;
+  cursor: pointer;
 }
 form #message_input {
   border: 0;
