@@ -11,8 +11,6 @@ var users = new Array();
 
 // USING STATIC CSS & JS FILEs
 
-//app.use(express.static('public/css'));
-//app.use(express.static('public/js'));
 app.use('/', express.static(path.join(__dirname + '/public')));
 app.use('/', express.static(path.join(__dirname + '/public/js')));
 app.use('/', express.static(path.join(__dirname + '/public/css')));
