@@ -7,11 +7,8 @@ $('#message_input').focus();
 
 $(function () {
   
-  //var socket = io.connect('http://localhost:80');
-  //var socket = io();
   var socket = io.connect('http://vps.wroblewskipiotr.pl:8000');
-  
-  
+    
   var showOnConsole = function(msg) {
     $('#console-p').append(msg+"<br>");
     $('#console-p').scrollTop($('#console-p')[0].scrollHeight);

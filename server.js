@@ -1,13 +1,18 @@
+var PORT = 8000;
+
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var path = require('path');
 var favicon = require('serve-favicon');
-var port = 8000;
+
 var user_sockets = new Array();
 var users = new Array();
 
+Array.prototype.diff = function(a) {
+  return this.filter(function(i) {return a.indexOf(i) < 0;});
+};
 
 // USING STATIC CSS & JS FILEs
 
@@ -24,17 +29,10 @@ app.get('/', function(req, res) {
 });
 
 
-Array.prototype.diff = function(a) {
-  return this.filter(function(i) {return a.indexOf(i) < 0;});
-};
-
-
 var onConnect = function(socket) {
 
  // ############ NEW CONNECTION ##########
- socket.emit('new connection', socket.id);
- //io.sockets.emit('update users list', users);
- 
+ socket.emit('new connection', socket.id); 
 
  // ############ USER REGISTER/UNREGISTER ##########
  socket.on('new user registered', function(user) {
@@ -92,6 +90,6 @@ var onConnect = function(socket) {
 
 io.on('connection', onConnect);
 
-http.listen(port, function() {
-  console.log('listening on *:'+port);
+http.listen(PORT, function() {
+  console.log('listening on *:'+PORT);
 });
