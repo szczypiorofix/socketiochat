@@ -4,7 +4,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var path = require('path');
 var favicon = require('serve-favicon');
-var port = 80;
+var port = 8000;
 
 
 // USING STATIC CSS & JS FILEs
@@ -63,8 +63,8 @@ var onConnect = function(socket) {
       }
     }
     console.log(users);
-    io.sockets.emit('user disconnected', 'User ' +user_disconnected +' has disconnected!');
-    io.sockets.emit('update users list', users);
+    //io.sockets.emit('user disconnected', 'User ' +user_disconnected +' has disconnected!');
+    //io.sockets.emit('update users list', users);
   });
 };
 

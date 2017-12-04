@@ -6,7 +6,9 @@ $('#message_name').val(user_name);
 $('#message_input').focus();
 
 $(function () {
-  var socket = io();
+  
+  var socket = io.connect('http://localhost:8000');
+
   $('form').submit(function() {
     socket.emit('chat name', $('#message_name').val());
     socket.emit('chat message', $('#message_input').val());
