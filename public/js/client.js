@@ -8,10 +8,10 @@ $('#message_input').focus();
 $(function () {
   
   // VPS SERVER
-  //var socket = io.connect('http://vps.wroblewskipiotr.pl:8000');
+  var socket = io.connect('http://vps.wroblewskipiotr.pl:8000');
 
   // LOCALHOST
-  var socket = io();
+  //var socket = io();
     
   var showOnConsole = function(msg) {
     $('#console-p').append(msg+"<br>");
