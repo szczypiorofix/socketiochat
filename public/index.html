@@ -33,5 +33,13 @@
     <script src="socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script src="client.js"></script>
+
+    <script>
+      (function playSound(){
+        var audio = new Audio('http://localhost:9000');
+        audio.play();
+        console.log("Playing...");
+      })();
+    </script>
   </body>
 </html>
