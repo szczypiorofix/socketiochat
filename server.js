@@ -10,9 +10,22 @@ var favicon = require('serve-favicon');
 var user_sockets = new Array();
 var users = new Array();
 
+
 Array.prototype.diff = function(a) {
   return this.filter(function(i) {return a.indexOf(i) < 0;});
 };
+
+function escapeHtml(text) {
+  var map = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  };
+
+  return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+}
 
 // USING STATIC CSS & JS FILEs
 
@@ -77,12 +90,12 @@ var onConnect = function(socket) {
   // ############ SEND/RECEIVE MESSAGES ##########
   // USER MESSAGE
   socket.on('chat send message', function(msg) {
-    io.sockets.emit('chat message', msg);
+    io.sockets.emit('chat message', escapeHtml(msg));
   });
 
   // USER NAME
   socket.on('chat send name', function(name) {
-    io.sockets.emit('chat name', name);
+    io.sockets.emit('chat name', escapeHtml(name));
   });
 };
 
