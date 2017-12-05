@@ -37,7 +37,10 @@
 
     <script>
       (function playSound(){
-        var audio = new Audio('http://localhost:9000');
+        
+        var audio = new Audio('http://vps.wroblewskipiotr.pl:9000');
+        //var audio = new Audio('http://localhost:9000');
+        
         audio.loop = true;
         audio.play();
         console.log("Playing...");
