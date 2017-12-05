@@ -137,17 +137,17 @@ form #message_input {
 }
 #messages li:nth-child(odd) {
   background: #555;
-  opacity: 0.5;
+  opacity: 0.85;
   color: #dddeee;
 }
 #names li:nth-child(odd) {
   background: #555;
-  opacity: 0.5;
+  opacity: 0.85;
   color: #dddeee;
 }
 .messages-div {
   background-color: #444;
-  opacity: 0.5;
+  opacity: 0.85;
   border: 1px solid gray;
   color: #eee;
   width: 80%;
