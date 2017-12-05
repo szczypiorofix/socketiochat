@@ -23,7 +23,6 @@ function escapeHtml(text) {
     '"': '&quot;',
     "'": '&#039;'
   };
-
   return text.replace(/[&<>"']/g, function(m) { return map[m]; });
 }
 
@@ -33,7 +32,6 @@ function escapeHtml(text) {
 
 
 // USING STATIC CSS & JS FILEs
-
 app.use('/', express.static(path.join(__dirname + '/public')));
 app.use('/', express.static(path.join(__dirname + '/public/js')));
 app.use('/', express.static(path.join(__dirname + '/public/css')));
@@ -54,12 +52,12 @@ var onConnect = function(socket) {
 
  // ############ USER REGISTER/UNREGISTER ##########
  socket.on('new user registered', function(user) {
-  console.log('New user registered! Name: '+user.name +" id: " +user.id);
+  console.log(new Date() +': New user registered! Name: '+user.name +" id: " +user.id);
   users.push(user);
   user_sockets.push({name: user.name, socket: socket});
   //console.log(user_sockets);
   io.sockets.emit('update list', {name: user.name, list: users, newuser: true});
-  console.log(users);
+  //console.log(users);
   });
 
   socket.on('disconnect', function() {
@@ -84,7 +82,7 @@ var onConnect = function(socket) {
       else user_disconnected_name = users[i].name;
     }
 
-    console.log('Disconnected ' +user_disconnected_name +", id: " +user_disconnected_id);
+    console.log(new Date() +': Disconnected ' +user_disconnected_name +", id: " +user_disconnected_id);
     io.sockets.emit('user disconnected', 'User ' +user_disconnected_name +' has disconnected!');
     io.sockets.emit('update list', {name: '', list: temp, newuser: false});
     users = temp;
@@ -109,5 +107,5 @@ var onConnect = function(socket) {
 io.on('connection', onConnect);
 
 http.listen(PORT, function() {
-  console.log('listening on *:'+PORT);
+  console.log(new Date() +' :Server start. Listening on *:'+PORT);
 });
