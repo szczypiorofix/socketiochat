@@ -80,6 +80,7 @@ var history = {
 app.use('/', express.static(path.join(__dirname + '/public')));
 app.use('/', express.static(path.join(__dirname + '/public/js')));
 app.use('/', express.static(path.join(__dirname + '/public/css')));
+app.use('/', express.static(path.join(__dirname + '/public/images')));
 
 // FAVICON
 app.use(favicon(path.join(__dirname, 'public', 'icon.png')))
