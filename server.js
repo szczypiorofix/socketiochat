@@ -27,6 +27,11 @@ function escapeHtml(text) {
   return text.replace(/[&<>"']/g, function(m) { return map[m]; });
 }
 
+// TODO - zamienić w kliencie .text() na .html() albo poprawić escapeHtml
+// TODO - strumieniowe przesyłanie muzyki
+// TODO - dodać historię np. 20-30 ostatnich wiadomości
+
+
 // USING STATIC CSS & JS FILEs
 
 app.use('/', express.static(path.join(__dirname + '/public')));
