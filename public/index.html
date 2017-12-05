@@ -11,6 +11,9 @@
     <div class="main-div">
       <h2>XMAS CHAT</h2>
       <h3>HO-HO-HO !!!</h3>
+      <video id="playvideo" height="230" style="margin: auto;">
+        Your browser does not support HTML5 video.
+      </video>
       <div class="messages-div" id="messages-div-id">
         <ul id="names"></ul>
         <ul id="messages"></ul>
@@ -38,11 +41,19 @@
     <script>
       (function playSound(){
         
-        var audio = new Audio('http://vps.wroblewskipiotr.pl:9000');
+/*         var audio = new Audio('http://vps.wroblewskipiotr.pl:9000');
         //var audio = new Audio('http://localhost:9000');
         
         audio.loop = true;
-        audio.play();
+        audio.play(); */
+
+        var video = document.getElementById("playvideo");
+        
+        video.src = 'http://localhost:8888/video.mp4';
+        //video.crossOrigin = 'anonymous';
+        video.loop = true;
+        video.play();
+
         console.log("Playing...");
       })();
     </script>
