@@ -7,7 +7,11 @@ $('#message_input').focus();
 
 $(function () {
   
-  var socket = io.connect('http://vps.wroblewskipiotr.pl:8000');
+  // VPS SERVER
+  //var socket = io.connect('http://vps.wroblewskipiotr.pl:8000');
+
+  // LOCALHOST
+  var socket = io();
     
   var showOnConsole = function(msg) {
     $('#console-p').append(msg+"<br>");
@@ -32,9 +36,14 @@ $(function () {
     showOnConsole(msg);
   });
 
-  socket.on('new connection', function(id) {
-    showOnConsole('Welcome officer! Your ID: ' +id);
-    socket.emit('new user registered', {name: $('#message_name').val(), id: id});
+  socket.on('new connection', function(data) {
+    showOnConsole('Welcome officer! Your ID: ' +data.id);
+    console.log(data.history);
+    for (var i = 0; i < data.history.length; i++) {
+      $('#names').append($('<li>').text(data.history[i].u));
+      $('#messages').append($('<li>').text(data.history[i].m));
+    }
+    socket.emit('new user registered', {name: $('#message_name').val(), id: data.id});
   });
 
   socket.on('update list', function(user) {
