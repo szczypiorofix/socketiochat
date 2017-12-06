@@ -1,6 +1,6 @@
 var http = require('http'),
 fs   = require('fs'),
-filePath = 'song2.mp3',
+filePath = 'jingle.mp3',
 stat = fs.statSync(filePath);
 
 http.createServer(function(request, response) {
