@@ -8,10 +8,10 @@ $('#message_input').focus();
 $(function () {
   
   // VPS SERVER
-  var socket = io.connect('http://vps.wroblewskipiotr.pl:8000');
+  //var socket = io.connect('http://vps.wroblewskipiotr.pl:8000');
 
   // LOCALHOST
-  //var socket = io();
+  var socket = io();
 
   var getParsedDate = function() {
     function leadingZero(i) {
@@ -32,11 +32,13 @@ $(function () {
     .append( $('<div class="single-message">')
       .append( 
         $('<div class="single-message-name">').text("@" +msg.name)
-      .append( 
-        $('<span class="single-message-date">').text(" "+msg.date)))
+        .append( 
+          $('<span class="single-message-date">').text(" "+msg.date))
+      )
       .append( 
         $('<div class="single-message-text">').text(msg.msg))
     );
+    $('.messages-div').scrollTop( $('#chat-div')[0].scrollHeight );
   }
     
   var showOnConsole = function(msg) {
@@ -57,8 +59,8 @@ $(function () {
   });
 
   socket.on('new connection', function(data) {
-    showOnConsole('Welcome officer! Your ID: ' +data.id);
-    console.log(data);
+    showOnConsole('Witamy świątecznym czacie! Twoje ID: ' +data.id);
+    //console.log(data);
     for (var i = 0; i < data.history.length; i++) {
       addNewMessage(data.history[i]);
     }
@@ -66,7 +68,7 @@ $(function () {
   });
 
   socket.on('update list', function(user) {
-    if (user.newuser) showOnConsole('New user joined! '+user.name);
+    if (user.newuser) showOnConsole('Do czatu dołączył/-a '+user.name);
     $('#users-list').html('');
     user.list.forEach(e => {
       document.getElementById('users-list').innerHTML 

@@ -11,14 +11,19 @@
       <div class="main-div">
         <div class="title-div">
           <img src="images/xmas.jpg" class="image-xmas" alt="xmas" />
-          <h2>XMAS CHAT</h2>
-          <h3>HO-HO-HO !!!</h3>
+          <h2>ŚWIĄTECZNY CHAT</h2>
+          <div class="music-buttons">
+            <span>Wybierz piosenkę:</span>
+            <button id="song1">1</button>
+            <button id="song2">2</button>
+            <button id="song3">3</button>
+          </div>
 
           <!-- <video id="playvideo" height="230" style="margin: auto;">
             Your browser does not support HTML5 video.
           </video> -->
         </div>
-        <div class="messages-div" id="messages-div-id">
+        <div class="messages-div">
           <div id="chat-div"></div>
         </div>
         <div class="user-list-div">
@@ -32,8 +37,8 @@
       </div>  
       <div class="form-div">
         <form action="">
-          <input type="text" id="message_name" placeholder="Name" disabled/>
-          <input type="text" id="message_input" autocomplete="off" placeholder="Message"/>
+          <input type="text" id="message_name" placeholder="Imię" disabled/>
+          <input type="text" id="message_input" autocomplete="off" placeholder="Wiadomość"/>
           <button type="submit" id="submit-button">Send</button>
         </form>
       </div>
@@ -43,22 +48,89 @@
     <script src="client.js"></script>
 
     <script>
-      (function playSound(){
-        
-        var audio = new Audio('http://vps.wroblewskipiotr.pl:9000');
-        //var audio = new Audio('http://localhost:9000');
+      $(function() {
 
-        audio.loop = true;
-        audio.play();
+          (function playSound() {
+            
+            // SWITCH BETWEEN LOCALHOST AND REMOTE SERVER
+            //var serverType = 'http://vps.wroblewskipiotr.pl:9000/';
+            var serverType = 'http://localhost:9000/';
 
-        /* var video = document.getElementById("playvideo"); 
-        video.src = 'http://localhost:8888/video.mp4';
-        //video.crossOrigin = 'anonymous';
-        video.loop = true;
-        video.play(); */
+            var audioSong1 = serverType+'song1';
+            var audioSong2 = serverType+'song2';
+            var audioSong3 = serverType+'song3';
 
-        console.log("Playing...");
-      })();
+            var audio = new Audio(audioSong1);
+            audio.loop = true;
+            audio.play();
+            var currentSong = 1;
+            console.log('Playing song '+currentSong);
+
+            var playSong = function(song) {
+              audio.pause();
+              switch(song) {
+                case 2: {
+                  audio = new Audio(audioSong2);
+                  break;
+                }
+                case 3: {
+                  audio = new Audio(audioSong3);
+                  break;
+                }
+                default: {
+                  audio = new Audio(audioSong1);
+                  break;
+                }
+              }
+              audio.loop = true;
+              audio.play();
+            };
+
+            $('#song1').click(function() {
+              if (currentSong !== 1) {
+                currentSong = 1;
+                console.log('Playing song '+currentSong);
+                playSong(currentSong);
+              } else {
+                console.log('Song '+currentSong +' paused.');
+                currentSong = 0;
+                audio.pause();
+              }
+            });
+
+            $('#song2').click(function() {
+              if (currentSong !== 2) {
+                currentSong = 2;
+                console.log('Playing song '+currentSong);
+                playSong(currentSong);
+              } else {
+                console.log('Song '+currentSong +' paused.');
+                currentSong = 0;
+                audio.pause();
+              }
+            });
+
+            $('#song3').click(function() {
+              if (currentSong !== 3) {
+                currentSong = 3;
+                console.log('Playing song '+currentSong);
+                playSong(currentSong);
+              } else {
+                console.log('Song '+currentSong +' paused.');
+                currentSong = 0;
+                audio.pause();
+              }
+            });
+
+
+            /* var video = document.getElementById("playvideo"); 
+            video.src = 'http://localhost:8888/video.mp4';
+            //video.crossOrigin = 'anonymous';
+            video.loop = true;
+            video.play(); */
+        })();
+
+      });
     </script>
   </body>
 </html>

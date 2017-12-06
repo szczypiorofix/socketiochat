@@ -11,7 +11,7 @@ exports.escapeHtml = function(text) {
 
 exports.history = {
     length: 0,
-    maxlength: 20,
+    maxlength: 30,
     data: [],
     get: function() {
       let temp = [];

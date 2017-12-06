@@ -57,7 +57,7 @@ var onConnect = function(socket) {
 
  // ############ USER REGISTER/UNREGISTER ##########
  socket.on('new user registered', function(user) {
-  console.log(getParsedDate() +'New user registered! Name: '+user.name +" id: " +user.id);
+  console.log(getParsedDate() +'Nowy użytkownik: '+user.name +" id: " +user.id);
   users.push(user);
   user_sockets.push({name: user.name, socket: socket});
   //console.log(user_sockets);
@@ -87,12 +87,11 @@ var onConnect = function(socket) {
       else user_disconnected_name = users[i].name;
     }
 
-    console.log(getParsedDate() +'Disconnected ' +user_disconnected_name +", id: " +user_disconnected_id);
-    io.sockets.emit('user disconnected', 'User ' +user_disconnected_name +' has disconnected!');
+    console.log(getParsedDate() +'Rozłączył się ' +user_disconnected_name +", id: " +user_disconnected_id);
+    io.sockets.emit('user disconnected', 'Użytkownik ' +user_disconnected_name +' rozłączył się.');
     io.sockets.emit('update list', {name: '', list: temp, newuser: false});
     users = temp;
   });
-
 
 
   // ############ SEND/RECEIVE MESSAGES ##########
@@ -106,5 +105,5 @@ var onConnect = function(socket) {
 io.on('connection', onConnect);
 
 http.listen(PORT, function() {
-  console.log(getParsedDate() +'Server start. Listening on *:'+PORT);
+  console.log(getParsedDate() +'Start serwera. Port nasłuchu *:'+PORT);
 });

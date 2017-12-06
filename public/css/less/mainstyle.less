@@ -11,15 +11,15 @@
 }
 
 @main-text-color: #eeeeee;
-@main-background-color: #222222;
+@main-background-color: #182024;
 
 @message-font-color: rgb(151, 20, 245);
-@message-font-background-color: #378B29;
+@message-font-background-color: rgba(27, 68, 95, 0.548);
 
-@message-text-color-username: rgb(248, 96, 96);
-@message-text-color-message: rgb(215, 214, 216);
-@message-text-color-date: rgb(238, 155, 141);
-@borders-color: rgba(255, 0, 0, 0.692);
+@message-text-color-username: rgb(255, 167, 167);
+@message-text-color-message: rgb(252, 219, 174);
+@message-text-color-date: darken(@message-text-color-username, 10%);
+@borders-color: rgba(66, 126, 161, 0.719);
 
 @button-color: rgb(130, 224, 255);
 
@@ -32,6 +32,7 @@ html, body {
     background-color: @main-background-color;
     color: @main-text-color;
     font-family: 'ROBOTO', sans-serif;
+    font-size: 1.01em;    
 }
 
 .main-div {
@@ -43,6 +44,22 @@ html, body {
     border-radius: 2px;
     z-index: 1;
     .title-div {
+        margin-left: 2px;
+        .music-buttons {
+            margin: auto;
+            width: 230px;
+            padding: 4px;
+            button {
+                background-color: lighten(@message-font-background-color, 50%);
+                color: @main-text-color;
+                border: 2px solid @borders-color;
+                border-radius: 2px;
+            }
+            button:hover {
+                background-color: lighten(@message-font-background-color, 30%);
+                cursor:pointer;
+            }
+        }
         .image-xmas {
             position: fixed;
             z-index: -1;
@@ -62,53 +79,57 @@ html, body {
 
 // ########################## MESSAGES ##########################
 
-#chat-div {
-    list-style-type: none;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    float: left;
-    //border-top: 1px solid @borders-color;
-    //border-bottom: 1px solid @borders-color;
-    font-size: 90%;
-    .single-message {
-        background-color: @message-font-background-color;
-        color: @message-font-color;
-        word-wrap: break-word;
-        padding: 3px;
-        margin-top: 1px;
-        border-radius: 2px;
-        .single-message-name {
-            font-size: 90%;
-            color: @message-text-color-username;
-        }
-        .single-message-date {
-            font-size: 90%;
-            color: @message-text-color-date;
-        }
-        .single-message-text {
-            font-size: 90%;
-            color: @message-text-color-message;
-        }
-    }
-    
-    .single-message:nth-child(odd) {
-        background: darken(@message-font-background-color, 5%);
-        color: darken(@message-font-color, 5%);
-    }
-}
-
 .messages-div {
     opacity: 0.85;
-    border: 1px solid @borders-color;
-    border-bottom: 2px solid @borders-color;
+    border: 2px solid @borders-color;
+    //border-bottom: 2px solid @borders-color;
     color: @main-text-color;
-    width: 80%;
+    width:  ~"calc(100% - 200px)";
     float: left;
     overflow-y: auto;
-    height: ~"calc(100% - 105px)";
-    min-height: ~"calc(100% - 105px)";
-    max-height: ~"calc(100% - 105px)";
+    height: ~"calc(100% - 100px)";
+    min-height: ~"calc(100% - 100px)";
+    max-height: ~"calc(100% - 100px)";
+
+    #chat-div {
+        list-style-type: none;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        float: left;
+        //border-top: 1px solid @borders-color;
+        //border-bottom: 1px solid @borders-color;
+        font-size: 90%;
+
+        .single-message {
+            background-color: @message-font-background-color;
+            color: @message-font-color;
+            word-wrap: break-word;
+            padding: 3px;
+            margin-top: 1px;
+            border-radius: 2px;
+
+            .single-message-name {
+                font-size: 90%;
+                color: @message-text-color-username;
+            }
+
+            .single-message-date {
+                font-size: 90%;
+                color: @message-text-color-date;
+            }
+
+            .single-message-text {
+                font-size: 90%;
+                color: @message-text-color-message;
+            }
+        }
+        
+        .single-message:nth-child(odd) {
+            background: darken(@message-font-background-color, 5%);
+            color: darken(@message-font-color, 5%);
+        }
+    }
 }
 
 
@@ -118,13 +139,13 @@ html, body {
     border-right: 2px solid @borders-color;
     border-top: 2px solid @borders-color;
     border-bottom: 2px solid @borders-color;
-    width: 20%;
+    width: 200px;
     float:left;
     overflow-y: auto;
     overflow-x: auto;
-    height: ~"calc(100% - 105px)";
-    min-height: ~"calc(100% - 105px)";
-    max-height: ~"calc(100% - 105px)";
+    height: ~"calc(100% - 100px)";
+    min-height: ~"calc(100% - 100px)";
+    max-height: ~"calc(100% - 100px)";
     list-style-type: none;
 }
 
@@ -140,7 +161,7 @@ html, body {
 
 // ########################## CONSOLE ##########################
 .console-div {
-    background: #111;
+    background: @main-background-color;
     position: fixed;
     opacity: 0.85;
     bottom: 35px;
@@ -225,7 +246,7 @@ html, body {
 // ########################## SNOW ##########################
 #snow{
 	background: none;
-  background-image: url('images/s1.png'), url('images/s2.png'), url('images/s3.png');
+    background-image: url('images/s1.png'), url('images/s2.png'), url('images/s3.png');
 	height: 100%;
 	left: 0;
 	position: absolute;
