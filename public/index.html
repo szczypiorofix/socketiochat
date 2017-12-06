@@ -53,8 +53,15 @@
           (function playSound() {
             
             // SWITCH BETWEEN LOCALHOST AND REMOTE SERVER
-            var serverType = 'http://vps.wroblewskipiotr.pl:9000/';
+            //var serverType = 'http://vps.wroblewskipiotr.pl:9000/';
             //var serverType = 'http://localhost:9000/';
+            
+            var serverType = null;
+            if (window.location.href.startsWith("http://localhost")) {
+              serverType = 'http://localhost:9000/';
+            } else {
+              serverType = 'http://vps.wroblewskipiotr.pl:9000/';
+            }
 
             var audioSong1 = serverType+'song1';
             var audioSong2 = serverType+'song2';
