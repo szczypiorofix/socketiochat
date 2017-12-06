@@ -20,19 +20,19 @@ body {
 .main-div {
   position: fixed;
   padding: 3px;
-  height: calc(100% - 35px);
+  height: calc(100% - 185px);
   width: 100%;
-  border: 3px solid #fe4;
+  border: 3px solid rgba(255, 0, 0, 0.692);
   border-radius: 2px;
   z-index: 1;
 }
 .main-div .title-div .image-xmas {
-  z-index: 0;
   position: fixed;
+  z-index: -1;
   left: 10px;
   top: 10px;
-  opacity: 0.9;
   width: 120px;
+  opacity: 0.9;
 }
 .main-div .title-div h3,
 .main-div .title-div h2 {
@@ -45,50 +45,70 @@ body {
   margin: 0;
   padding: 0;
   float: left;
-  border-top: 1px solid #fe4;
-  border-bottom: 1px solid #fe4;
   font-size: 90%;
 }
 #chat-div .single-message {
-  background-color: #3a2a5f;
-  color: #ece;
+  background-color: #378B29;
+  color: #9714f5;
   word-wrap: break-word;
   padding: 3px;
+  margin-top: 1px;
+  border-radius: 2px;
 }
 #chat-div .single-message .single-message-name {
   font-size: 90%;
-  color: #f60;
+  color: #f86060;
 }
 #chat-div .single-message .single-message-date {
   font-size: 90%;
-  color: #c31;
+  color: #ee9b8d;
 }
 #chat-div .single-message .single-message-text {
   font-size: 90%;
-  color: #dddeee;
+  color: #d7d6d8;
 }
 #chat-div .single-message:nth-child(odd) {
-  background: #595959;
-  color: #dddeee;
+  background: #2f7723;
+  color: #8a0ae6;
 }
 .messages-div {
   opacity: 0.85;
-  border: 1px solid #fe4;
-  border-bottom: 2px solid #fe4;
+  border: 1px solid rgba(255, 0, 0, 0.692);
+  border-bottom: 2px solid rgba(255, 0, 0, 0.692);
   color: #eeeeee;
   width: 80%;
   float: left;
   overflow-y: auto;
-  height: calc(100% - 240px);
-  min-height: calc(100% - 240px);
-  max-height: calc(100% - 240px);
+  height: calc(100% - 105px);
+  min-height: calc(100% - 105px);
+  max-height: calc(100% - 105px);
+}
+.user-list-div {
+  border-left: 1px solid rgba(255, 0, 0, 0.692);
+  border-right: 2px solid rgba(255, 0, 0, 0.692);
+  border-top: 2px solid rgba(255, 0, 0, 0.692);
+  border-bottom: 2px solid rgba(255, 0, 0, 0.692);
+  width: 20%;
+  float: left;
+  overflow-y: auto;
+  overflow-x: auto;
+  height: calc(100% - 105px);
+  min-height: calc(100% - 105px);
+  max-height: calc(100% - 105px);
+  list-style-type: none;
+}
+#users-list {
+  list-style-type: none;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  padding: 5px;
 }
 .console-div {
   background: #111;
   position: fixed;
   opacity: 0.85;
-  bottom: 25px;
-  width: 100%;
+  bottom: 35px;
+  width: calc(100% - 1px);
   height: 150px;
   max-height: 150px;
   min-height: 150px;
@@ -96,6 +116,9 @@ body {
   line-height: 200%;
   color: #eeeeee;
   font-family: 'Oxygen', sans-serif;
+  border-left: 3px solid rgba(255, 0, 0, 0.692);
+  border-right: 3px solid rgba(255, 0, 0, 0.692);
+  border-bottom: 3px solid rgba(255, 0, 0, 0.692);
 }
 .console-div p {
   margin: 0;
@@ -104,7 +127,7 @@ body {
   line-height: 95%;
 }
 .console-div hr {
-  color: #fe4;
+  color: rgba(255, 0, 0, 0.692);
 }
 #console-p {
   overflow-y: auto;
@@ -116,10 +139,10 @@ body {
   position: fixed;
   width: 100%;
   height: 35px;
-  border-left: 3px solid #fe4;
-  border-right: 3px solid #fe4;
-  border-bottom: 3px solid #fe4;
-  margin-bottom: 2px;
+  border-left: 2px solid rgba(255, 0, 0, 0.692);
+  border-right: 2px solid rgba(255, 0, 0, 0.692);
+  border-bottom: 2px solid rgba(255, 0, 0, 0.692);
+  margin-bottom: 1px;
   bottom: 0;
 }
 .form-div form {
@@ -132,13 +155,15 @@ body {
   border: 0;
   width: 100px;
   padding: 5px 3px;
+  margin-top: 1px;
   float: left;
 }
 .form-div form button[type="submit"] {
   width: 110px;
   padding: 5px 3px;
   margin-left: 3px;
-  background: #82e0ff;
+  margin-top: 1px;
+  background-color: #82e0ff;
   border: none;
   float: left;
   cursor: pointer;
@@ -148,27 +173,8 @@ body {
   width: calc(100% - 216px);
   padding: 5px 3px;
   margin-left: 3px;
+  margin-top: 1px;
   float: left;
-}
-.user-list-div {
-  border-left: 1px solid #fe4;
-  border-right: 2px solid #fe4;
-  border-top: 2px solid #fe4;
-  border-bottom: 2px solid #fe4;
-  width: 20%;
-  float: left;
-  overflow-y: auto;
-  overflow-x: auto;
-  height: calc(100% - 240px);
-  min-height: calc(100% - 240px);
-  max-height: calc(100% - 240px);
-  list-style-type: none;
-}
-#users-list {
-  list-style-type: none;
-  margin-top: 3px;
-  margin-bottom: 3px;
-  padding: 5px;
 }
 #snow {
   background: none;

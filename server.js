@@ -97,9 +97,8 @@ var onConnect = function(socket) {
 
   // ############ SEND/RECEIVE MESSAGES ##########
   socket.on('chat send message', function(message) {
-    history.putMsg(message.msg);
-    history.putName(message.name);
-    io.sockets.emit('chat message', {name: escapeHtml(message.name), msg: escapeHtml(message.msg)});
+    history.put(message);
+    io.sockets.emit('chat message', {name: escapeHtml(message.name), msg: escapeHtml(message.msg), date: message.date});
   });
 };
 

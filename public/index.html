@@ -32,24 +32,24 @@
       </div>  
       <div class="form-div">
         <form action="">
-          <input type="text" id="message_name" placeholder="Name"/>
+          <input type="text" id="message_name" placeholder="Name" disabled/>
           <input type="text" id="message_input" autocomplete="off" placeholder="Message"/>
-          <button type="submit">Send</button>
+          <button type="submit" id="submit-button">Send</button>
         </form>
       </div>
     </div>
     <script src="socket.io/socket.io.js"></script>
-    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="jquery-3.2.1.min.js"></script>
     <script src="client.js"></script>
 
     <script>
       (function playSound(){
         
-        // var audio = new Audio('http://vps.wroblewskipiotr.pl:9000');
+        var audio = new Audio('http://vps.wroblewskipiotr.pl:9000');
         //var audio = new Audio('http://localhost:9000');
 
-        //audio.loop = true;
-        //audio.play();
+        audio.loop = true;
+        audio.play();
 
         /* var video = document.getElementById("playvideo"); 
         video.src = 'http://localhost:8888/video.mp4';

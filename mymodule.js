@@ -12,30 +12,21 @@ exports.escapeHtml = function(text) {
 exports.history = {
     length: 0,
     maxlength: 20,
-    dataU: [],
-    dataM: [],
+    data: [],
     get: function() {
       let temp = [];
       for (var i = this.length-1; i >= 0; i--) {
-        temp[this.length - i -1] = {u: this.dataU[i], m: this.dataM[i]};
+        temp[this.length - i -1] = {name: this.data[i].name, msg: this.data[i].msg, date: this.data[i].date};
       }
       return temp;
     },
-    putMsg: function(m) {
-      let temp = new Array();
-      for (var i = 1; i < this.length; i++) {
-        temp[i] = this.dataM[i-1];
-      }
-      temp[0] = m;
-      this.dataM = temp;
-    },
-    putName: function(n) {
+    put: function(m) {
       let temp = new Array();
       if (this.length < this.maxlength) this.length++;
       for (var i = 1; i < this.length; i++) {
-        temp[i] = this.dataU[i-1];
+        temp[i] = this.data[i-1];
       }
-      temp[0] = n;
-      this.dataU = temp;
+      temp[0] = m;
+      this.data = temp;
     }
   };

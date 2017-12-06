@@ -8,10 +8,10 @@ $('#message_input').focus();
 $(function () {
   
   // VPS SERVER
-  //var socket = io.connect('http://vps.wroblewskipiotr.pl:8000');
+  var socket = io.connect('http://vps.wroblewskipiotr.pl:8000');
 
   // LOCALHOST
-  var socket = io();
+  //var socket = io();
 
   var getParsedDate = function() {
     function leadingZero(i) {
@@ -33,7 +33,7 @@ $(function () {
       .append( 
         $('<div class="single-message-name">').text("@" +msg.name)
       .append( 
-        $('<span class="single-message-date">').text(" "+getParsedDate())))
+        $('<span class="single-message-date">').text(" "+msg.date)))
       .append( 
         $('<div class="single-message-text">').text(msg.msg))
     );
@@ -44,9 +44,11 @@ $(function () {
     $('#console-p').scrollTop($('#console-p')[0].scrollHeight);
   };
 
-  $('form').submit(function() {
-    socket.emit('chat send message', {name: $('#message_name').val(), msg: $('#message_input').val()});
-    $('#message_input').val('');
+  $('#submit-button').click(function() {
+    if ($('#message_input').val() !== '') {
+      socket.emit('chat send message', {name: $('#message_name').val(), msg: $('#message_input').val(), date: getParsedDate()});
+      $('#message_input').val('');
+    }
     return false;
   });
 
@@ -56,9 +58,9 @@ $(function () {
 
   socket.on('new connection', function(data) {
     showOnConsole('Welcome officer! Your ID: ' +data.id);
+    console.log(data);
     for (var i = 0; i < data.history.length; i++) {
-      $('#names').append($('<li>').text(data.history[i].u));
-      $('#messages').append($('<li>').text(data.history[i].m));
+      addNewMessage(data.history[i]);
     }
     socket.emit('new user registered', {name: $('#message_name').val(), id: data.id});
   });
