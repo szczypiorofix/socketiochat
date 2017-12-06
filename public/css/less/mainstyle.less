@@ -1,0 +1,252 @@
+
+// ########################## INIT ##########################
+@font-face {
+    font-family: ROBOTO;
+    src: url(fonts/Roboto-Regular.ttf);
+}
+
+@font-face {
+    font-family: OXYGEN;
+    src: url(fonts/Oxygen-Regular.ttf);
+}
+
+@main-text-color: #eeeeee;
+@main-background-color: #222222;
+
+@message-font-color: #ece;
+@message-font-background-color: rgb(58, 42, 95);
+
+@main-text-color-username: #f60;
+@main-text-color-message: #dddeee;
+@main-text-color-date: #c31;
+@borders-color: #fe4;
+
+// ########################## MAIN ##########################
+* {box-sizing: border-box;}
+
+html, body {
+    padding: 0;
+    margin: 0;
+    background-color: @main-background-color;
+    color: @main-text-color;
+    font-family: 'ROBOTO', sans-serif;
+}
+
+.main-div {
+    position: fixed;
+    padding: 3px;
+    height: ~"calc(100% - 35px)";
+    width: 100%;
+    border: 3px solid @borders-color;
+    border-radius: 2px;
+    z-index: 1;
+    .title-div {
+        .image-xmas {
+            z-index: 0;
+            position: fixed;
+            left: 10px;
+            top: 10px;
+            opacity: 0.9;
+            width: 120px;
+        }
+        h3, h2 {
+            z-index: 1;
+            text-align: center;
+        }
+    }
+}
+
+
+
+// ########################## MESSAGES ##########################
+
+#chat-div {
+    list-style-type: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    float: left;
+    border-top: 1px solid @borders-color;
+    border-bottom: 1px solid @borders-color;
+    font-size: 90%;
+    .single-message {
+        background-color: @message-font-background-color;
+        color: @message-font-color;
+        word-wrap: break-word;
+        padding: 3px;
+        .single-message-name {
+            font-size: 90%;
+            color: @main-text-color-username;
+        }
+        .single-message-date {
+            font-size: 90%;
+            color: @main-text-color-date;
+        }
+        .single-message-text {
+            font-size: 90%;
+            color: @main-text-color-message;
+        }
+    }
+    
+    .single-message:nth-child(odd) {
+        background: #595959;
+        color: #dddeee;
+    }
+}
+
+.messages-div {
+    opacity: 0.85;
+    border: 1px solid @borders-color;
+    border-bottom: 2px solid @borders-color;
+    color: @main-text-color;
+    width: 80%;
+    float: left;
+    overflow-y: auto;
+    height: ~"calc(100% - 240px)";
+    min-height: ~"calc(100% - 240px)";
+    max-height: ~"calc(100% - 240px)";
+}
+
+
+
+// ########################## CONSOLE ##########################
+.console-div {
+    background: #111;
+    position: fixed;
+    opacity: 0.85;
+    bottom: 25px;
+    width: 100%;
+    height: 150px;
+    max-height: 150px;
+    min-height: 150px;
+    padding: 5px;
+    line-height: 200%;
+    color: @main-text-color;
+    font-family: 'Oxygen', sans-serif;
+    p {
+        margin:0;
+        padding: 0;
+        font-size: 80%;
+        line-height: 95%;
+    }
+    hr {
+        color: @borders-color;
+    }
+}
+
+#console-p {
+    overflow-y: auto;
+    height: 100px;
+    max-height: 100px;
+    min-height: 100px;
+}
+
+
+
+// ########################## INPUT FORM ##########################
+.form-div {
+    position: fixed;
+    width: 100%;
+    height: 35px;
+    border-left: 3px solid @borders-color;
+    border-right: 3px solid @borders-color;
+    border-bottom: 3px solid @borders-color;
+    margin-bottom: 2px;
+    bottom: 0;
+
+    form {
+        background: #000;    
+        width: 100%;
+        padding: 2px;
+        height: 30px;
+
+        #message_name {
+            border: 0;
+            width: 100px;
+            padding: 5px 3px;
+            float: left;
+        }
+        button[type="submit"] {
+            width: 110px;
+            padding: 5px 3px;
+            margin-left: 3px;
+            background: rgb(130, 224, 255);
+            border: none;
+            float: left;
+            cursor: pointer;
+        }
+        #message_input {
+            border: 0;
+            width: ~"calc(100% - 216px)";
+            padding: 5px 3px;
+            margin-left: 3px;
+            float: left;
+        }  
+    }        
+}
+
+
+
+
+// ########################## SNOW ##########################
+.user-list-div {
+    border-left: 1px solid @borders-color;
+    border-right: 2px solid @borders-color;
+    border-top: 2px solid @borders-color;
+    border-bottom: 2px solid @borders-color;
+    width: 20%;
+    float:left;
+    overflow-y: auto;
+    overflow-x: auto;
+    height: ~"calc(100% - 240px)";
+    min-height: ~"calc(100% - 240px)";
+    max-height: ~"calc(100% - 240px)";
+    list-style-type: none;
+}
+
+
+#users-list {
+    list-style-type: none;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    padding: 5px;
+}
+
+
+
+// ########################## SNOW ##########################
+#snow{
+	background: none;
+  background-image: url('images/s1.png'), url('images/s2.png'), url('images/s3.png');
+	height: 100%;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index:0;
+	-webkit-animation: snowing 10s linear infinite;
+	-moz-animation: snowing 10s linear infinite;
+	-ms-animation: snowing 10s linear infinite;
+	animation: snowing 10s linear infinite;
+}
+@keyframes snowing {
+  0% {background-position: 0px 0px, 0px 0px, 0px 0px;}
+  50% {background-position: 500px 500px, 100px 200px, -100px 150px;}
+  100% {background-position: 500px 1000px, 200px 400px, -100px 300px;}
+}
+@-moz-keyframes snowing {
+  0% {background-position: 0px 0px, 0px 0px, 0px 0px;}
+  50% {background-position: 500px 500px, 100px 200px, -100px 150px;}
+  100% {background-position: 400px 1000px, 200px 400px, 100px 300px;}
+}
+@-webkit-keyframes snowing {
+  0% {background-position: 0px 0px, 0px 0px, 0px 0px;}
+  50% {background-position: 500px 500px, 100px 200px, -100px 150px;}
+  100% {background-position: 500px 1000px, 200px 400px, -100px 300px;}
+}
+@-ms-keyframes snowing {
+  0% {background-position: 0px 0px, 0px 0px, 0px 0px;}
+  50% {background-position: 500px 500px, 100px 200px, -100px 150px;}
+  100% {background-position: 500px 1000px, 200px 400px, -100px 300px;}
+}
+

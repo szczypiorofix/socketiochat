@@ -8,10 +8,36 @@ $('#message_input').focus();
 $(function () {
   
   // VPS SERVER
-  var socket = io.connect('http://vps.wroblewskipiotr.pl:8000');
+  //var socket = io.connect('http://vps.wroblewskipiotr.pl:8000');
 
   // LOCALHOST
-  //var socket = io();
+  var socket = io();
+
+  var getParsedDate = function() {
+    function leadingZero(i) {
+      return (i < 10)? '0'+i : i;
+    }
+    let months = ["styczeń", "luty", "marzec", "kwiecień", "maj", "czerwiec", 'lipiec', "sierpień", "wrzesień", "październik", "listopad", "grudzień"];
+    let d = new Date();
+    return d.getDate()
+    +" "+(months[d.getMonth()])
+    +" "+d.getFullYear()
+    +" "+leadingZero(d.getHours())
+    +":"+leadingZero(d.getMinutes())
+    +":"+leadingZero(d.getSeconds());
+  }
+
+  var addNewMessage = function(msg) {
+    $('#chat-div')
+    .append( $('<div class="single-message">')
+      .append( 
+        $('<div class="single-message-name">').text("@" +msg.name)
+      .append( 
+        $('<span class="single-message-date">').text(" "+getParsedDate())))
+      .append( 
+        $('<div class="single-message-text">').text(msg.msg))
+    );
+  }
     
   var showOnConsole = function(msg) {
     $('#console-p').append(msg+"<br>");
@@ -19,26 +45,17 @@ $(function () {
   };
 
   $('form').submit(function() {
-    socket.emit('chat send name', $('#message_name').val());
-    socket.emit('chat send message', $('#message_input').val());
+    socket.emit('chat send message', {name: $('#message_name').val(), msg: $('#message_input').val()});
     $('#message_input').val('');
     return false;
   });
 
-  socket.on('chat name', function(name) {
-    $('#names').append($('<li>').text(name));
-    $('#console-p').append(name+" is typing: ");
-  });
-
-  socket.on('chat message', function(msg) {
-    $('#messages').append($('<li>').text(msg));    
-    $('#messages-div-id').scrollTop($('#messages-div-id')[0].scrollHeight);
-    showOnConsole(msg);
+  socket.on('chat message', function(message) {
+    addNewMessage(message);
   });
 
   socket.on('new connection', function(data) {
     showOnConsole('Welcome officer! Your ID: ' +data.id);
-    console.log(data.history);
     for (var i = 0; i < data.history.length; i++) {
       $('#names').append($('<li>').text(data.history[i].u));
       $('#messages').append($('<li>').text(data.history[i].m));

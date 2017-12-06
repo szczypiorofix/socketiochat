@@ -11,6 +11,8 @@ var mymodule = require('./mymodule');
 var user_sockets = new Array();
 var users = new Array();
 
+var history = mymodule.history;
+var escapeHtml = mymodule.escapeHtml;
 
 Array.prototype.diff = function(a) {
   return this.filter(function(i) {return a.indexOf(i) < 0;});
@@ -28,7 +30,7 @@ function getParsedDate() {
   +" "+d.getFullYear()
   +" "+leadingZero(d.getHours()))
   +":"+leadingZero(d.getMinutes())
-  +":"+d.getSeconds()+", ";
+  +":"+leadingZero(d.getSeconds())+", ";
 }
 
 
@@ -36,6 +38,7 @@ function getParsedDate() {
 app.use('/', express.static(path.join(__dirname + '/public')));
 app.use('/', express.static(path.join(__dirname + '/public/js')));
 app.use('/', express.static(path.join(__dirname + '/public/css')));
+app.use('/', express.static(path.join(__dirname + '/public/fonts')));
 app.use('/', express.static(path.join(__dirname + '/public/images')));
 
 // FAVICON
@@ -93,19 +96,12 @@ var onConnect = function(socket) {
 
 
   // ############ SEND/RECEIVE MESSAGES ##########
-  // USER MESSAGE
-  socket.on('chat send message', function(msg) {
-    history.putMsg(msg);
-    io.sockets.emit('chat message', escapeHtml(msg));
-  });
-
-  // USER NAME
-  socket.on('chat send name', function(name) {
-    history.putName(name);
-    io.sockets.emit('chat name', escapeHtml(name));
+  socket.on('chat send message', function(message) {
+    history.putMsg(message.msg);
+    history.putName(message.name);
+    io.sockets.emit('chat message', {name: escapeHtml(message.name), msg: escapeHtml(message.msg)});
   });
 };
-
 
 
 io.on('connection', onConnect);

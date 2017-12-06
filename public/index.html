@@ -4,35 +4,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Socket.IO chat</title>
     <link rel="stylesheet" type="text/css" href="normalize.css">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="mainstyle.css">
   </head>
   <body>
     <div id="snow">
-    <div class="main-div">
-      <h2>XMAS CHAT</h2>
-      <h3>HO-HO-HO !!!</h3>
-      <video id="playvideo" height="230" style="margin: auto;">
-        Your browser does not support HTML5 video.
-      </video>
-      <div class="messages-div" id="messages-div-id">
-        <ul id="names"></ul>
-        <ul id="messages"></ul>
+      <div class="main-div">
+        <div class="title-div">
+          <img src="images/xmas.jpg" class="image-xmas" alt="xmas" />
+          <h2>XMAS CHAT</h2>
+          <h3>HO-HO-HO !!!</h3>
+
+          <!-- <video id="playvideo" height="230" style="margin: auto;">
+            Your browser does not support HTML5 video.
+          </video> -->
+        </div>
+        <div class="messages-div" id="messages-div-id">
+          <div id="chat-div"></div>
+        </div>
+        <div class="user-list-div">
+          <ul id="users-list"></ul>
+        </div>
       </div>
-      <div class="user-list-div">
-        <ul id="users-list"></ul>
+      <div class="console-div">
+        <p>Console:</p>
+        <hr>
+        <p id="console-p"></p>
+      </div>  
+      <div class="form-div">
+        <form action="">
+          <input type="text" id="message_name" placeholder="Name"/>
+          <input type="text" id="message_input" autocomplete="off" placeholder="Message"/>
+          <button type="submit">Send</button>
+        </form>
       </div>
-    </div>
-    <div class="console-div">
-      <p>Console:</p>
-      <hr>
-      <p id="console-p"></p>
-    </div>  
-    
-    <form action="">
-      <input type="text" id="message_name" placeholder="Name"/>
-      <input type="text" id="message_input" autocomplete="off" placeholder="Message"/>
-      <button type="submit">Send</button>
-    </form>
     </div>
     <script src="socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
@@ -41,14 +45,13 @@
     <script>
       (function playSound(){
         
-         var audio = new Audio('http://vps.wroblewskipiotr.pl:9000');
+        // var audio = new Audio('http://vps.wroblewskipiotr.pl:9000');
         //var audio = new Audio('http://localhost:9000');
-        
-        audio.loop = true;
-        audio.play();
 
-        /* var video = document.getElementById("playvideo");
-        
+        //audio.loop = true;
+        //audio.play();
+
+        /* var video = document.getElementById("playvideo"); 
         video.src = 'http://localhost:8888/video.mp4';
         //video.crossOrigin = 'anonymous';
         video.loop = true;
