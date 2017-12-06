@@ -7,11 +7,12 @@ $('#message_input').focus();
 
 $(function () {
   
-  // VPS SERVER
-  //var socket = io.connect('http://vps.wroblewskipiotr.pl:8000');
-
-  // LOCALHOST
-  var socket = io();
+  var socket = null;
+  if (window.location.href.startsWith("http://localhost")) {
+    socket = io();
+  } else {
+    socket = io.connect('http://vps.wroblewskipiotr.pl:8000');
+  }
 
   var getParsedDate = function() {
     function leadingZero(i) {
