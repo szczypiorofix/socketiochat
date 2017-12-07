@@ -7,7 +7,9 @@
     <link rel="stylesheet" type="text/css" href="mainstyle.css">
   </head>
   <body>
-    <div id="snow">
+    <canvas id="c" height="600" width="800">
+    </canvas>
+    <!-- <div id="snow"> ###SNOW -->
       <div class="main-div">
         <div class="title-div">
           <img src="images/xmas.jpg" class="image-xmas" alt="xmas" />
@@ -42,10 +44,12 @@
           <button type="submit" id="submit-button">Send</button>
         </form>
       </div>
-    </div>
+    <!-- </div> ###SNOW --> 
+
     <script src="socket.io/socket.io.js"></script>
     <script src="jquery-3.2.1.min.js"></script>
     <script src="client.js"></script>
+    <script src="snow.js"></script>
 
     <script>
       $(function() {
