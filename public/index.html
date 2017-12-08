@@ -16,9 +16,11 @@
           <h2>ŚWIĄTECZNY CHAT</h2>
           <div class="music-buttons">
             <span>Wybierz piosenkę:</span>
-            <button id="song1">1</button>
-            <button id="song2">2</button>
-            <button id="song3">3</button>
+            <button id="song1" class="tooltip">1<span class="tooltiptext">Jingle Bells</span></button>
+            <button id="song2" class="tooltip">2<span class="tooltiptext">Maybe...</span></button>
+            <button id="song3" class="tooltip">3<span class="tooltiptext">I Don't Want To Set The World On Fire</span></button>
+            <button id="song4" class="tooltip">4<span class="tooltiptext">The End Of The World</span></button>
+            <button id="song5" class="tooltip">5<span class="tooltiptext">Soooo bongo, bongo, bongo...</span></button>
           </div>
 
           <!-- <video id="playvideo" height="230" style="margin: auto;">
@@ -54,11 +56,9 @@
     <script>
       $(function() {
 
-          (function playSound() {
+          function playSound() {
             
             // SWITCH BETWEEN LOCALHOST AND REMOTE SERVER
-            //var serverType = 'http://vps.wroblewskipiotr.pl:9000/';
-            //var serverType = 'http://localhost:9000/';
             
             var serverType = null;
             if (window.location.href.startsWith("http://localhost")) {
@@ -70,6 +70,8 @@
             var audioSong1 = serverType+'song1';
             var audioSong2 = serverType+'song2';
             var audioSong3 = serverType+'song3';
+            var audioSong4 = serverType+'song4';
+            var audioSong5 = serverType+'song5';
 
             var audio = new Audio(audioSong1);
             audio.loop = true;
@@ -78,6 +80,7 @@
             console.log('Playing song '+currentSong);
 
             var playSong = function(song) {
+              console.log('Playing song '+song);
               audio.pause();
               switch(song) {
                 case 2: {
@@ -86,6 +89,14 @@
                 }
                 case 3: {
                   audio = new Audio(audioSong3);
+                  break;
+                }
+                case 4: {
+                  audio = new Audio(audioSong4);
+                  break;
+                }
+                case 5: {
+                  audio = new Audio(audioSong5);
                   break;
                 }
                 default: {
@@ -100,7 +111,6 @@
             $('#song1').click(function() {
               if (currentSong !== 1) {
                 currentSong = 1;
-                console.log('Playing song '+currentSong);
                 playSong(currentSong);
               } else {
                 console.log('Song '+currentSong +' paused.');
@@ -112,7 +122,6 @@
             $('#song2').click(function() {
               if (currentSong !== 2) {
                 currentSong = 2;
-                console.log('Playing song '+currentSong);
                 playSong(currentSong);
               } else {
                 console.log('Song '+currentSong +' paused.');
@@ -124,7 +133,28 @@
             $('#song3').click(function() {
               if (currentSong !== 3) {
                 currentSong = 3;
-                console.log('Playing song '+currentSong);
+                playSong(currentSong);
+              } else {
+                console.log('Song '+currentSong +' paused.');
+                currentSong = 0;
+                audio.pause();
+              }
+            });
+
+            $('#song4').click(function() {
+              if (currentSong !== 4) {
+                currentSong = 4;
+                playSong(currentSong);
+              } else {
+                console.log('Song '+currentSong +' paused.');
+                currentSong = 0;
+                audio.pause();
+              }
+            });
+
+            $('#song5').click(function() {
+              if (currentSong !== 5) {
+                currentSong = 5;
                 playSong(currentSong);
               } else {
                 console.log('Song '+currentSong +' paused.');
@@ -139,9 +169,25 @@
             //video.crossOrigin = 'anonymous';
             video.loop = true;
             video.play(); */
-        })();
+        };
 
-      });
+        //playSound();
+
+
+          var pos = $('.user-list-div').position().left;
+          $('.user-list-div').hover(
+              function() {
+                console.log(pos);
+                  //if (pos > 1000)
+                  //    $(this).animate({left: '-=100px'},100);
+                  },
+                  function() {
+                  //    if (pos < 950)
+                  //    $(this).animate({left: '+=100px'},200);
+                  }
+              ).trigger('mouseout');
+          }
+      );
     </script>
   </body>
 </html>

@@ -47,7 +47,7 @@ html, body {
         margin-left: 2px;
         .music-buttons {
             margin: auto;
-            width: 230px;
+            width: 290px;
             padding: 4px;
             button {
                 background-color: lighten(@message-font-background-color, 50%);
@@ -58,6 +58,27 @@ html, body {
             button:hover {
                 background-color: lighten(@message-font-background-color, 30%);
                 cursor:pointer;
+            }
+            .tooltip {
+                position: relative;
+                display: inline-block;
+                border-bottom: 1px dotted black;
+            }
+            .tooltip .tooltiptext {
+                visibility: hidden;
+                width: 130px;
+                background-color: rgba(0, 0, 0, 0.329);
+                color: #fff;
+                text-align: center;
+                padding: 5px 0;
+                border-radius: 6px;
+                position: absolute;
+                z-index: 1;
+                top: 35px;
+                left: 105%;
+            }
+            .tooltip:hover .tooltiptext {
+                visibility: visible;
             }
         }
         .image-xmas {
@@ -84,7 +105,7 @@ html, body {
     border: 2px solid @borders-color;
     //border-bottom: 2px solid @borders-color;
     color: @main-text-color;
-    width:  ~"calc(100% - 200px)";
+    width:  100%;
     float: left;
     overflow-y: auto;
     height: ~"calc(100% - 100px)";
@@ -135,20 +156,21 @@ html, body {
 
 // ########################## USERS LIST ##########################
 .user-list-div {
+    position: fixed;
     border-left: 1px solid @borders-color;
     border-right: 2px solid @borders-color;
     border-top: 2px solid @borders-color;
     border-bottom: 2px solid @borders-color;
-    width: 200px;
+    width: 150px;
+    left: ~"calc(100% - 50px)";
     float:left;
     overflow-y: auto;
     overflow-x: auto;
-    height: ~"calc(100% - 100px)";
-    min-height: ~"calc(100% - 100px)";
-    max-height: ~"calc(100% - 100px)";
+    height: ~"calc(100% - 297px)";
+    min-height: ~"calc(100% - 297px)";
+    max-height: ~"calc(100% - 297px)";
     list-style-type: none;
 }
-
 
 #users-list {
     list-style-type: none;
