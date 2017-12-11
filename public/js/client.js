@@ -60,8 +60,6 @@ $(function () {
   });
 
   socket.on('new connection', function(data) {
-    showOnConsole('Witamy świątecznym czacie! Twoje ID: ' +data.id);
-    //console.log(data);
     for (var i = 0; i < data.history.length; i++) {
       addNewMessage(data.history[i]);
     }
@@ -69,7 +67,7 @@ $(function () {
   });
 
   socket.on('update list', function(user) {
-    if (user.newuser) showOnConsole('Do czatu dołączył/-a '+user.name);
+    if (user.newuser) addNewMessage({name: 'serwer', msg: 'Do czatu dołączył/-a '+user.name, date: getParsedDate()});
     $('#users-list').html('');
     user.list.forEach(e => {
       document.getElementById('users-list').innerHTML 
@@ -78,6 +76,6 @@ $(function () {
   });
 
   socket.on('user disconnected', function(msg) {
-    showOnConsole(msg);
+    addNewMessage({name: 'serwer', msg: msg, date: getParsedDate()});
   });
 });

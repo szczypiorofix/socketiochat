@@ -1,4 +1,6 @@
 // BOROADCAST SERVER
+var port = 9000;
+
 var http = require('http');
 var fs = require('fs');
 
@@ -55,4 +57,4 @@ http.createServer(function(request, response) {
         fs.createReadStream(songName5).pipe(response);
     }
 })
-.listen(9000);
+.listen(port);
