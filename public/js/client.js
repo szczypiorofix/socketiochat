@@ -54,6 +54,7 @@ $(function () {
 
   socket.on('chat message', function(message) {
     addNewMessage(message);
+    browserNotification({name: message.name, msg: message.msg});
   });
 
   socket.on('new connection', function(data) {
