@@ -19,7 +19,7 @@ var songFile4 = fs.statSync(songName4);
 var songName5 = 'song5.mp3';
 var songFile5 = fs.statSync(songName5);
 
-/*
+
 http.createServer(function(request, response) {
      if (request.url == '/song1') {
         response.writeHead(200, {
@@ -57,4 +57,4 @@ http.createServer(function(request, response) {
         fs.createReadStream(songName5).pipe(response);
     }
 })
-.listen(port); */
+.listen(port);
