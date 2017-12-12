@@ -21,6 +21,9 @@ var songFile5 = fs.statSync(songName5);
 
 
 http.createServer(function(request, response) {
+
+    setTimeout(() => response.end(), 1000);
+
      if (request.url == '/song1') {
         response.writeHead(200, {
             'Content-Type': 'audio/mpeg',
