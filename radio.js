@@ -21,7 +21,7 @@ var songFile5 = fs.statSync(songName5);
 
 
 http.createServer(function(request, response) {
-    if (request.url == '/song1') {
+    /* if (request.url == '/song1') {
         response.writeHead(200, {
             'Content-Type': 'audio/mpeg',
             'Content-Length': songFile1.size
@@ -55,6 +55,6 @@ http.createServer(function(request, response) {
             'Content-Length': songFile5.size
         });
         fs.createReadStream(songName5).pipe(response);
-    }
+    } */
 })
 .listen(port);
