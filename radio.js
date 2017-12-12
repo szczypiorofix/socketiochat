@@ -19,6 +19,7 @@ var songFile4 = fs.statSync(songName4);
 var songName5 = 'song5.mp3';
 var songFile5 = fs.statSync(songName5);
 
+console.log(http);
 
 http.createServer(function(request, response) {
      if (request.url == '/song1') {
