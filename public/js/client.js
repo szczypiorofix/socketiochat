@@ -2,7 +2,7 @@
 var user_name = prompt("Please enter your name");
 if (user_name == null || user_name == '') user_name = "Todd Howard";
 
-$('#message_name').val(user_name);
+$('#message_name').text(user_name);
 $('#message_input').focus();
 
 $(function () {
@@ -47,8 +47,9 @@ $(function () {
     $('#console-p').scrollTop($('#console-p')[0].scrollHeight);
   };
 
-  $('#submit-button').click(function() {
-    if ($('#message_input').val() !== '') {
+  $('#message_input').keypress(function(event) {
+    //console.log( "Handler for .keypress() called. "+event.which );
+    if ($('#message_input').val() !== '' && event.which === 13) {
       socket.emit('chat send message', {name: $('#message_name').val(), msg: $('#message_input').val(), date: getParsedDate()});
       $('#message_input').val('');
     }
