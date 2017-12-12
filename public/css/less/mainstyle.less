@@ -192,15 +192,29 @@ html, body {
 
                 .form-input {
                     width: 100%;
-                    padding: 5px;
-                    border: 3px solid #cccccc;
+                    padding: 5px 10px;
+                    border: 2px solid #cccccc;
                     border-radius: 5px;
                     outline: none;
+                    background: transparent;
                     transition: border 0.3s;
                 }
 
+                .form-input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+                    color: #aaaaaa;
+                  }
+                  .form-input::-moz-placeholder { /* Firefox 19+ */
+                    color: #aaaaaa;
+                  }
+                  .form-input:-ms-input-placeholder { /* IE 10+ */
+                    color: #aaaaaa;
+                  }
+                  .form-input:-moz-placeholder { /* Firefox 18- */
+                    color: #aaaaaa;
+                  }
+
                 .form-input:focus {
-                    border: 3px solid #888888;
+                    border: 2px solid #aaaaaa;
                     border-radius: 5px;
                     outline: none;
                 }
