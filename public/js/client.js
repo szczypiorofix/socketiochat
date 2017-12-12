@@ -39,21 +39,17 @@ $(function () {
       .append( 
         $('<div class="single-message-text">').text(msg.msg))
     );
-    $('.messages-div').scrollTop( $('#chat-div')[0].scrollHeight );
+    $('.message-div').scrollTop( $('#chat-div')[0].scrollHeight );
   }
-    
-  var showOnConsole = function(msg) {
-    $('#console-p').append(msg+"<br>");
-    $('#console-p').scrollTop($('#console-p')[0].scrollHeight);
-  };
 
-  $('#message_input').keypress(function(event) {
-    //console.log( "Handler for .keypress() called. "+event.which );
-    if ($('#message_input').val() !== '' && event.which === 13) {
-      socket.emit('chat send message', {name: $('#message_name').val(), msg: $('#message_input').val(), date: getParsedDate()});
-      $('#message_input').val('');
+  $('#message_input').keyup(function(e){
+    if(e.keyCode == 13)
+    {
+      if ($('#message_input').val() !== '') {
+        socket.emit('chat send message', {name: user_name, msg: $('#message_input').val(), date: getParsedDate()});
+        $('#message_input').val('');
+      }
     }
-    return false;
   });
 
   socket.on('chat message', function(message) {
@@ -64,7 +60,7 @@ $(function () {
     for (var i = 0; i < data.history.length; i++) {
       addNewMessage(data.history[i]);
     }
-    socket.emit('new user registered', {name: $('#message_name').val(), id: data.id});
+    socket.emit('new user registered', {name: user_name, id: data.id});
   });
 
   socket.on('update list', function(user) {
