@@ -45,7 +45,7 @@ app.use('/', express.static(path.join(__dirname + '/public/images')));
 app.use(favicon(path.join(__dirname, 'public', 'icon.png')))
 
 
-app.get('/', function(req, res) {
+app.get('/?', function(req, res) {
   res.sendFile(__dirname + '/public/index.html');
 });
 
