@@ -60,9 +60,7 @@ var onConnect = function(socket) {
   console.log(getParsedDate() +'Nowy użytkownik: '+user.name +" id: " +user.id);
   users.push(user);
   user_sockets.push({name: user.name, socket: socket});
-  //console.log(user_sockets);
   io.sockets.emit('update list', {name: user.name, list: users, newuser: true});
-  //console.log(users);
   });
 
   socket.on('disconnect', function() {
