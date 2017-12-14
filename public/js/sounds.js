@@ -4,9 +4,9 @@ function playSound() {
     
     var serverType = null;
     if (window.location.href.startsWith("http://localhost")) {
-      serverType = 'http://localhost:9000/';
+      serverType = 'http://localhost:80/';
     } else {
-      serverType = 'http://vps.wroblewskipiotr.pl:9000/';
+      serverType = 'http://vps.wroblewskipiotr.pl:80/';
     }
 
     var audioSong1 = serverType+'song1';

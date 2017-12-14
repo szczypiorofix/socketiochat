@@ -1,4 +1,4 @@
-var PORT = 8000;
+var PORT = 80;
 
 var express = require('express');
 var app = express();
