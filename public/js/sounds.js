@@ -4,9 +4,9 @@ function playSound() {
     
     var serverType = null;
     if (window.location.href.startsWith("http://localhost")) {
-      serverType = 'http://localhost:3000/';
+      serverType = 'http://localhost/musicbox/';
     } else {
-      serverType = 'http://node.wroblewskipiotr.pl:3000/';
+      serverType = 'http://node.wroblewskipiotr.pl/musicbox/';
     }
 
     var audioSong1 = serverType+'song1';

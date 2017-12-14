@@ -1,5 +1,5 @@
 // BOROADCAST SERVER
-var port = 3000;
+var port = 80;
 
 var http = require('http');
 var fs = require('fs');
