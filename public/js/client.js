@@ -11,7 +11,7 @@ $(function () {
   if (window.location.href.startsWith("http://localhost")) {
     socket = io();
   } else {
-    socket = io.connect('http://vps.wroblewskipiotr.pl:8000');
+    socket = io.connect('http://node.wroblewskipiotr.pl:80');
   }
 
   var getParsedDate = function() {

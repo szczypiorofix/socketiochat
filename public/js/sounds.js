@@ -6,7 +6,7 @@ function playSound() {
     if (window.location.href.startsWith("http://localhost")) {
       serverType = 'http://localhost:3000/';
     } else {
-      serverType = 'http://vps.wroblewskipiotr.pl:3000/';
+      serverType = 'http://node.wroblewskipiotr.pl:3000/';
     }
 
     var audioSong1 = serverType+'song1';
