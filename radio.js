@@ -1,5 +1,5 @@
 // BOROADCAST SERVER
-var port = 80;
+var port = 3000;
 
 var http = require('http');
 var fs = require('fs');
@@ -21,8 +21,6 @@ var songFile5 = fs.statSync(songName5);
 
 
 http.createServer(function(request, response) {
-
-    //setTimeout(() => response.end(), 1000);
 
      if (request.url == '/song1') {
         response.writeHead(200, {
