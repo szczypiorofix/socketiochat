@@ -23,7 +23,6 @@ function playSound() {
 
     var playSong = function(song) {
       console.log('Playing song '+song);
-      console.log(audio);
       audio.pause();
       switch(song) {
         case 2: {
