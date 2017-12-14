@@ -54,11 +54,15 @@
     <script src="client.js"></script>
     <script src="snow.js"></script>
     <script src="sounds.js"></script>
-    <script src="style.js"></script>
     <script src="notify.js"></script>
 
     <script>
       $(function() {
+        
+        // Rozwijane menu wyboru piosenki
+        $('#music-dropdown-button').click(function() {   
+          $('#music-dropdown-content').slideToggle( "fast", function() {} );
+        });
         
         playSound();
         BrowserNotification.init();
