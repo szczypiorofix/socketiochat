@@ -7,47 +7,34 @@ var io = require('socket.io')(http);
 var path = require('path');
 var fs = require('fs');
 var favicon = require('serve-favicon');
-var mymodule = require('./mymodule');
+
+var bbcode_module = require('./mymodules/bbcode');
+var history_module = require('./mymodules/history');
+var parseddate_module = require('./mymodules/parseddate');
+var escapehtml_module = require('./mymodules/escapehtml');
+
+var history = history_module.history;
+var escapeHtml = escapehtml_module.escapeHtml;
+var bbcode = bbcode_module.bbcode;
+var getParsedDate = parseddate_module.getParsedDate;
 
 var songName1 = 'song1.mp3';
 var songFile1 = fs.statSync(songName1);
-
 var songName2 = 'song2.mp3';
 var songFile2 = fs.statSync(songName2);
-
 var songName3 = 'song3.mp3';
 var songFile3 = fs.statSync(songName3);
-
 var songName4 = 'song4.mp3';
 var songFile4 = fs.statSync(songName4);
-
 var songName5 = 'song5.mp3';
 var songFile5 = fs.statSync(songName5);
 
 var user_sockets = new Array();
 var users = new Array();
 
-var history = mymodule.history;
-var escapeHtml = mymodule.escapeHtml;
-
 Array.prototype.diff = function(a) {
   return this.filter(function(i) {return a.indexOf(i) < 0;});
 };
-
-function getParsedDate() {
-  function leadingZero(i) {
-    return (i < 10)? '0'+i : i;
-  }
-  let months = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", 'Lipiec', "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
-  let d = new Date();
-  return leadingZero(
-  leadingZero(d.getDate()) 
-  +" "+months[d.getMonth()]
-  +" "+d.getFullYear()
-  +" "+leadingZero(d.getHours()))
-  +":"+leadingZero(d.getMinutes())
-  +":"+leadingZero(d.getSeconds())+", ";
-}
 
 
 // USING STATIC CSS & JS FILEs
@@ -65,6 +52,10 @@ app.get('/?', function(req, res) {
   res.sendFile(__dirname + '/public/index.html');
 });
 
+app.get('/json', function(req, res) {
+  res.setHeader('Content-Type', 'application/json');
+  res.send(bbcode.emoji);
+});
 
 // MUSICBOX
 app.get('/musicbox/song1', function(request, response) {
@@ -149,8 +140,9 @@ var onConnect = function(socket) {
 
   // ############ SEND/RECEIVE MESSAGES ##########
   socket.on('chat send message', function(message) {
+    message.msg = bbcode.create(message.msg);
     history.put(message);
-    io.sockets.emit('chat message', {name: escapeHtml(message.name), msg: escapeHtml(message.msg), date: message.date});
+    io.sockets.emit('chat message', {name: escapeHtml(message.name), msg: message.msg, date: message.date});
   });
 };
 

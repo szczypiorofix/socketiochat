@@ -37,7 +37,7 @@ $(function () {
           $('<span class="single-message-date">').text(" "+msg.date))
       )
       .append( 
-        $('<div class="single-message-text">').text(msg.msg))
+        $('<div class="single-message-text">').html(msg.msg))
     );
     $('.message-div').scrollTop( $('#chat-div')[0].scrollHeight );
   }

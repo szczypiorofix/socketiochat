@@ -1,14 +1,3 @@
-exports.escapeHtml = function(text) {
-    var map = {
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      '"': '&quot;',
-      "'": '&#039;'
-    };
-    return text.replace(/[&<>"']/g, function(m) { return map[m]; });
-}
-
 exports.history = {
     length: 0,
     maxlength: 30,
@@ -29,4 +18,4 @@ exports.history = {
       temp[0] = m;
       this.data = temp;
     }
-  };
+};
