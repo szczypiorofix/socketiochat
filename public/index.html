@@ -16,8 +16,13 @@
         <div class="title-div">
             
         </div>
-        <div class="users-list">
+        <div class="users-list" id="vue-users-list">
             <ul id="users-list">
+                <user-list-item
+                  v-for="item in users"
+                  v-bind:todo="item"
+                  v-bind:key="item.id">
+                </user-list-item>
             </ul>
         </div>
       </div>
@@ -43,6 +48,9 @@
         </div>
         <div class="input-div">
           <div class="form-div">
+            <div class="prompt-div">
+              <div class="prompt-area-text" id="prompt-area"></div>
+            </div>
             <input type="text" id="message_input" class="form-input" autocomplete="off" placeholder="Wiadomość"/>
           </div>
         </div>
@@ -51,10 +59,12 @@
 
     <script src="socket.io/socket.io.js"></script>
     <script src="jquery-3.2.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="client.js"></script>
     <script src="snow.js"></script>
     <script src="sounds.js"></script>
     <script src="notify.js"></script>
+    <script src="prompt.js"></script>
 
     <script>
       $(function() {
@@ -64,9 +74,10 @@
           $('#music-dropdown-content').slideToggle( "fast", function() {} );
         });
         
-        playSound();
+        //playSound();
+
         BrowserNotification.init();
-        
+
       }
     );
     </script>

@@ -7,6 +7,19 @@ $('#message_input').focus();
 
 $(function () {
   
+  Vue.component('user-list-item', {
+    props: ['todo'],
+    template: '<li>{{ todo.name }}</li>'
+  })
+
+  var vueUsersList = new Vue({
+    el: '#vue-users-list',
+    data: {
+      users: []
+    }
+  });
+
+
   var socket = null;
   if (window.location.href.startsWith("http://localhost")) {
     socket = io();
@@ -68,11 +81,13 @@ $(function () {
 
   socket.on('update list', function(user) {
     if (user.newuser) addNewMessage({name: 'serwer', msg: 'Do czatu dołączył/-a '+user.name, date: getParsedDate()});
-    $('#users-list').html('');
-    user.list.forEach(e => {
-      document.getElementById('users-list').innerHTML 
-        += ('<li style="cursor:pointer" onclick="document.getElementById(\'message_input\').value = \'/'+e.name+': \'">' + e.name +'</li>');
-    });
+    //$('#users-list').html('');
+    //user.list.forEach(e => {
+    //  document.getElementById('users-list').innerHTML 
+    //    += ('<li style="cursor:pointer" onclick="document.getElementById(\'message_input\').value = \'/'+e.name+': \'">' + e.name +'</li>');
+    //});
+
+    vueUsersList.date = user.list;
   });
 
   socket.on('user disconnected', function(msg) {

@@ -1,16 +1,16 @@
 exports.bbcode = {
     emoji: {
-        ':smile:': '&#x1F601;',
-        ':smile_tears:': '&#x1F602;',
-        ':rotfl:': '&#x1F923;',
-        ':grinningbig:': '&#x1F603;',
-        ':grinningsmile:': '&#x1F604;',
-        ':grinningsweat:': '&#x1F605;',
-        ':grinningsquint:': '&#x1F606;',
-        ':wink:': '&#x1F609;',
-        ':sunglasses:': '&#x1F60E;',
-        ':facefood:': '&#x1F60B;',
-        ':kiss:': '&#x1F618;'
+        'smile': '&#x1F601;',
+        'smile_tears': '&#x1F602;',
+        'rotfl': '&#x1F923;',
+        'grinningbig': '&#x1F603;',
+        'grinningsmile': '&#x1F604;',
+        'grinningsweat': '&#x1F605;',
+        'grinningsquint': '&#x1F606;',
+        'wink': '&#x1F609;',
+        'sunglasses': '&#x1F60E;',
+        'facefood': '&#x1F60B;',
+        'kiss': '&#x1F618;'
     },
     
     create: function(text) {
@@ -73,7 +73,7 @@ exports.bbcode = {
     
         //EMOJI
         Object.keys(this.emoji).forEach((value) => {
-            var re = RegExp(value, "g");
+            var re = RegExp(':'+value+':', 'g');
             newtext = newtext.replace(re, '<span>'+this.emoji[value]+'</span>');
         });
         return newtext;
