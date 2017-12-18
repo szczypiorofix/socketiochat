@@ -12,8 +12,8 @@ Vue.component('user-list-item', {
 });
 
 Vue.component('emoji-list-item', {
-  props: ['e', 'i'],
-  template: '<span>:{{ i }}: <span v-html="e"></span>, </span>'
+  props: ['e'],
+  template: '<span>:{{ e.name }}: <span v-html="e.code"></span>, </span>'
 });
 
 var vueUsersList = new Vue({
@@ -24,9 +24,48 @@ var vueUsersList = new Vue({
 });
 
 var emojiList = new Vue({
-  el: '#prompt-area',
+  el: '#form-div-vue',
   data: {
-    emojis: []
+    emojis: [],
+    emojiToView: ''
+  },
+  methods: {
+    filterEmojis: function() {
+      // IF METHOD FILTER IS NOT AVAILABLE
+      if (!Array.prototype.filter)
+      {
+        Array.prototype.filter = function(fun /*, thisp*/)
+        {
+          var len = this.length;
+          if (typeof fun != "function")
+            throw new TypeError();
+
+          var res = new Array();
+          var thisp = arguments[1];
+          for (var i = 0; i < len; i++)
+          {
+            if (i in this)
+            {
+              var val = this[i]; // in case fun mutates this
+              if (fun.call(thisp, val, i, this))
+                res.push(val);
+            }
+          }
+
+          return res;
+        };
+      }
+      var g = function() {
+
+        function isBigEnough(element, index, array) {
+          return (element.name.startsWith('s'));
+        }
+
+        emojiToView = emojiList.emojis.filter(isBigEnough);
+        return emojiToView;
+      }
+      console.log(g());
+    }
   }
 });
 

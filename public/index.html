@@ -49,17 +49,17 @@
         <div class="message-div" id="chat-div">
         </div>
         <div class="input-div">
-          <div class="form-div">
+          <div class="form-div" id="form-div-vue">
             <div class="prompt-div">
               <div class="prompt-area-text" id="prompt-area">
+                <p>{{ filterEmojis }}</p>
                 <emoji-list-item
-                  v-for="(emoji, index) in emojis"
-                  v-bind:e="emoji"
-                  v-bind:i="index">
+                  v-for="emoji in emojis"
+                  v-bind:e="emoji">
                 </emoji-list-item>
               </div>
             </div>
-            <input type="text" id="message_input" class="form-input" autocomplete="off" placeholder="Wiadomość"/>
+            <input type="text" id="message_input" v:bind="filterEmojis" class="form-input" autocomplete="off" placeholder="Wiadomość"/>
           </div>
         </div>
       </div>

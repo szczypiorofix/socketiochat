@@ -1,17 +1,17 @@
 exports.bbcode = {
-    emoji: {
-        'smile': '&#x1F601;',
-        'smile_tears': '&#x1F602;',
-        'rotfl': '&#x1F923;',
-        'grinningbig': '&#x1F603;',
-        'grinningsmile': '&#x1F604;',
-        'grinningsweat': '&#x1F605;',
-        'grinningsquint': '&#x1F606;',
-        'wink': '&#x1F609;',
-        'sunglasses': '&#x1F60E;',
-        'facefood': '&#x1F60B;',
-        'kiss': '&#x1F618;'
-    },
+    emoji: [
+        {name: 'smile', code: '&#x1F601;'},
+        {name: 'smile_tears', code: '&#x1F602;'},
+        {name: 'rotfl', code: '&#x1F923;'},
+        {name: 'grinningbig', code: '&#x1F603;'},
+        {name: 'grinningsmile', code: '&#x1F604;'},
+        {name: 'grinningsweat', code: '&#x1F605;'},
+        {name: 'grinningsquint', code: '&#x1F606;'},
+        {name: 'wink', code: '&#x1F609;'},
+        {name: 'sunglasses', code: '&#x1F60E;'},
+        {name: 'facefood', code: '&#x1F60B;'},
+        {name: 'kiss', code: '&#x1F618;'}
+    ],
     
     create: function(text) {
         let newtext;
@@ -72,9 +72,9 @@ exports.bbcode = {
     
     
         //EMOJI
-        Object.keys(this.emoji).forEach((value) => {
-            var re = RegExp(':'+value+':', 'g');
-            newtext = newtext.replace(re, '<span>'+this.emoji[value]+'</span>');
+        this.emoji.forEach(function(element, index, array) {
+            var re = RegExp(':'+element.name+':', 'g');
+            newtext = newtext.replace(re, '<span>'+element.code+'</span>');
         });
         return newtext;
     }
