@@ -1,6 +1,6 @@
 $(document).ready(function (){
     
-        var canvas = document.getElementById('c'),
+        /* var canvas = document.getElementById('c'),
             context = canvas.getContext('2d');
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
@@ -77,5 +77,5 @@ $(document).ready(function (){
     
         var clearCanvas = function clearCanvas(){
             context.clearRect(0,0,sizeX,sizeY);
-        }
+        } */
     });

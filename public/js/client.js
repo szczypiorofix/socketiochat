@@ -5,20 +5,32 @@ if (user_name == null || user_name == '') user_name = "Todd Howard";
 $('#message_name').text(user_name);
 $('#message_input').focus();
 
+
+Vue.component('user-list-item', {
+  props: ['user'],
+  template: '<li>{{ user.name }}</li>'
+});
+
+Vue.component('emoji-list-item', {
+  props: ['e', 'i'],
+  template: '<span>:{{ i }}: <span v-html="e"></span>, </span>'
+});
+
+var vueUsersList = new Vue({
+  el: '#vue-users-list',  
+  data: {
+    users: []
+  }
+});
+
+var emojiList = new Vue({
+  el: '#prompt-area',
+  data: {
+    emojis: []
+  }
+});
+
 $(function () {
-  
-  Vue.component('user-list-item', {
-    props: ['todo'],
-    template: '<li>{{ todo.name }}</li>'
-  })
-
-  var vueUsersList = new Vue({
-    el: '#vue-users-list',
-    data: {
-      users: []
-    }
-  });
-
 
   var socket = null;
   if (window.location.href.startsWith("http://localhost")) {
@@ -79,15 +91,11 @@ $(function () {
     socket.emit('new user registered', {name: user_name, id: data.id});
   });
 
-  socket.on('update list', function(user) {
-    if (user.newuser) addNewMessage({name: 'serwer', msg: 'Do czatu dołączył/-a '+user.name, date: getParsedDate()});
-    //$('#users-list').html('');
-    //user.list.forEach(e => {
-    //  document.getElementById('users-list').innerHTML 
-    //    += ('<li style="cursor:pointer" onclick="document.getElementById(\'message_input\').value = \'/'+e.name+': \'">' + e.name +'</li>');
-    //});
-
-    vueUsersList.date = user.list;
+  socket.on('update list', function(dataFromServer) {
+    if (dataFromServer.newuser) {
+      addNewMessage({name: 'serwer', msg: 'Do czatu dołączył/-a '+dataFromServer.name, date: getParsedDate()});
+    }
+    vueUsersList.users = dataFromServer.list;
   });
 
   socket.on('user disconnected', function(msg) {

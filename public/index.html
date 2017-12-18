@@ -17,13 +17,12 @@
             
         </div>
         <div class="users-list" id="vue-users-list">
-            <ul id="users-list">
-                <user-list-item
-                  v-for="item in users"
-                  v-bind:todo="item"
-                  v-bind:key="item.id">
-                </user-list-item>
-            </ul>
+          <ul id="users-list">
+            <user-list-item
+              v-for="user in users"
+                v-bind:user="user">
+            </user-list-item>
+          </ul>
         </div>
       </div>
       <div class="main-message-div">
@@ -42,6 +41,9 @@
                   <li id="song5" class="music-dropdown-content item">5</li>
               </ul>
           </div>
+          <div class="snow-button">
+            <button>Snow</button>
+          </div>
             
         </div>
         <div class="message-div" id="chat-div">
@@ -49,7 +51,13 @@
         <div class="input-div">
           <div class="form-div">
             <div class="prompt-div">
-              <div class="prompt-area-text" id="prompt-area"></div>
+              <div class="prompt-area-text" id="prompt-area">
+                <emoji-list-item
+                  v-for="(emoji, index) in emojis"
+                  v-bind:e="emoji"
+                  v-bind:i="index">
+                </emoji-list-item>
+              </div>
             </div>
             <input type="text" id="message_input" class="form-input" autocomplete="off" placeholder="Wiadomość"/>
           </div>

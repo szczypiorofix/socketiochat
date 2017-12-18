@@ -5,7 +5,11 @@ var xmlhttp = new XMLHttpRequest();
 xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
         var emoji = JSON.parse(this.responseText);
-        $('#message_input').keypress(function(e) {
+        emojiList.emojis = emoji;
+        
+        console.log(emojiList.emojis);
+
+        /* $('#message_input').keypress(function(e) {
             if (e.which === 58 && emoji != null) {
                 var t = '<span>';
                 for (var key in emoji) {
@@ -19,7 +23,7 @@ xmlhttp.onreadystatechange = function() {
             else {
                 $('#prompt-area').text('');
             }
-        });
+        }); */
     }
 };
 xmlhttp.open("GET", "http://localhost/json", true);
