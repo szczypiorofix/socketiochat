@@ -10,3 +10,7 @@ xmlhttp.onreadystatechange = function() {
 };
 xmlhttp.open("GET", "http://localhost/json", true);
 xmlhttp.send();
+
+// document.getElementById('message_input').addEventListener('keypress', function(e) {
+//    console.log(e.which);
+//})

@@ -10,7 +10,7 @@ exports.history = {
       return temp;
     },
     put: function(m) {
-      let temp = new Array();
+      let temp = []
       if (this.length < this.maxlength) this.length++;
       for (var i = 1; i < this.length; i++) {
         temp[i] = this.data[i-1];

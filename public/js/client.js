@@ -40,7 +40,7 @@ var emojiList = new Vue({
           if (typeof fun != "function")
             throw new TypeError();
 
-          var res = new Array();
+          var res = [];
           var thisp = arguments[1];
           for (var i = 0; i < len; i++)
           {
@@ -51,20 +51,18 @@ var emojiList = new Vue({
                 res.push(val);
             }
           }
-
           return res;
         };
       }
-      var g = function() {
 
-        function isBigEnough(element, index, array) {
-          return (element.name.startsWith('s'));
-        }
-
-        emojiToView = emojiList.emojis.filter(isBigEnough);
-        return emojiToView;
+      function filterEmoji(s) {
+        return emojiList.emojis.filter(function (element, index, array) {
+          return (element.name.startsWith(s));
+        });
+        return 'dupa';
       }
-      console.log(g());
+
+      console.log(filterEmoji('s'));
     }
   }
 });
