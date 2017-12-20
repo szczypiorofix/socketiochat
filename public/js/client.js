@@ -27,10 +27,12 @@ var emojiList = new Vue({
   el: '#form-div-vue',
   data: {
     emojis: [],
-    emojiToView: ''
+    emojiToView: '',
+    showEmojiDiv: false,
+    emojiToFilter: ''
   },
   methods: {
-    filterEmojis: function() {
+    filterEmojis: function(f) {
       // IF METHOD FILTER IS NOT AVAILABLE
       if (!Array.prototype.filter)
       {
@@ -57,12 +59,55 @@ var emojiList = new Vue({
 
       function filterEmoji(s) {
         return emojiList.emojis.filter(function (element, index, array) {
-          return (element.name.startsWith(s));
+          return (element.name.indexOf(s) >= 0);
         });
-        return 'dupa';
       }
 
-      console.log(filterEmoji('s'));
+      function isAlphaNumericKey(k) {
+        if (k.length > 1) return false;
+        return true;
+      }
+      
+      if (isAlphaNumericKey(f.key)) {
+        
+        if (f.key === ':') emojiList.showEmojiDiv = true;
+        if (f.key === ' ') {
+          emojiList.showEmojiDiv = false;
+          emojiList.emojiToFilter = '';
+        }
+
+        if (emojiList.showEmojiDiv) {
+          if (f.key !== ':') emojiList.emojiToFilter += f.key;
+          for (var i = 0; i < emojiList.emojis.length; i++) {
+            if ($('#message_input').text().indexOf(emojiList.emojis[i].name) >= 0) {
+              console.log(emojiList.emojis[i].name);
+              emojiList.emojiToView = filterEmoji(f.key);
+            }
+          }
+        }        
+        
+        emojiList.lastKey = f.key;
+        
+        //emojiList.emojiToView = filterEmoji(f.key);
+        //console.log(emojiList.emojiToView);
+        
+      } else {
+        if (f.key === 'Enter') {
+          emojiList.showEmojiDiv = false;
+          emojiList.emojiToFilter = '';
+          console.log('Clear ...');
+        }
+        if (f.key === 'Backspace') {
+          emojiList.emojiToFilter = emojiList.emojiToFilter.substring(0, emojiList.emojiToFilter.length - 1);
+          if ($('#message_input').text().endsWith(':')) {
+            console.log('Koniec!');
+            emojiList.showEmojiDiv = false;
+            emojiList.emojiToFilter = '';
+          }
+        }
+      }
+      console.log('Show emoji? : '+emojiList.showEmojiDiv);
+      if (emojiList.showEmojiDiv) console.log('Emoji filter: '+emojiList.emojiToFilter);
     }
   }
 });
