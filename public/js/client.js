@@ -84,7 +84,7 @@ var emojiList = new Vue({
               emojiList.emojiToView = filterEmoji(f.key);
             }
           }
-        }        
+        }
         
         emojiList.lastKey = f.key;
         
