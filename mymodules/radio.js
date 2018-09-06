@@ -4,6 +4,9 @@ var port = 80;
 var http = require('http');
 var fs = require('fs');
 
+var songName0 = 'song0.mp3';
+var songFile0 = fs.statSync(songName0);
+
 var songName1 = 'song1.mp3';
 var songFile1 = fs.statSync(songName1);
 
@@ -16,13 +19,17 @@ var songFile3 = fs.statSync(songName3);
 var songName4 = 'song4.mp3';
 var songFile4 = fs.statSync(songName4);
 
-var songName5 = 'song5.mp3';
-var songFile5 = fs.statSync(songName5);
-
 
 http.createServer(function(request, response) {
 
-     if (request.url == '/song1') {
+     if (request.url == '/song0') {
+        response.writeHead(200, {
+            'Content-Type': 'audio/mpeg',
+            'Content-Length': songFile0.size
+        });
+        fs.createReadStream(songName0).pipe(response);
+    }
+    if (request.url == '/song1') {
         response.writeHead(200, {
             'Content-Type': 'audio/mpeg',
             'Content-Length': songFile1.size
@@ -49,13 +56,6 @@ http.createServer(function(request, response) {
             'Content-Length': songFile4.size
         });
         fs.createReadStream(songName4).pipe(response);
-    }
-    if (request.url == '/song5') {
-        response.writeHead(200, {
-            'Content-Type': 'audio/mpeg',
-            'Content-Length': songFile5.size
-        });
-        fs.createReadStream(songName5).pipe(response);
     }
 })
 .listen(port);

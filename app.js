@@ -18,6 +18,8 @@ var escapeHtml = escapehtml_module.escapeHtml;
 var bbcode = bbcode_module.bbcode;
 var getParsedDate = parseddate_module.getParsedDate;
 
+var songName0 = 'song0.mp3';
+var songFile0 = fs.statSync(songName0);
 var songName1 = 'song1.mp3';
 var songFile1 = fs.statSync(songName1);
 var songName2 = 'song2.mp3';
@@ -26,8 +28,6 @@ var songName3 = 'song3.mp3';
 var songFile3 = fs.statSync(songName3);
 var songName4 = 'song4.mp3';
 var songFile4 = fs.statSync(songName4);
-var songName5 = 'song5.mp3';
-var songFile5 = fs.statSync(songName5);
 
 var user_sockets = new Array();
 var users = new Array();
@@ -58,12 +58,19 @@ app.get('/json', function(req, res) {
 });
 
 // MUSICBOX
-app.get('/musicbox/song1', function(request, response) {
+app.get('/musicbox/song0', function(request, response) {
     response.writeHead(200, {
         'Content-Type': 'audio/mpeg',
-        'Content-Length': songFile1.size
+        'Content-Length': songFile0.size
     });
-    fs.createReadStream(songName1).pipe(response);
+    fs.createReadStream(songName0).pipe(response);
+});
+app.get('/musicbox/song1', function(request, response) {
+  response.writeHead(200, {
+      'Content-Type': 'audio/mpeg',
+      'Content-Length': songFile1.size
+  });
+  fs.createReadStream(songName1).pipe(response);
 });
 app.get('/musicbox/song2', function(request, response) {
   response.writeHead(200, {
@@ -86,13 +93,6 @@ app.get('/musicbox/song4', function(request, response) {
   });
   fs.createReadStream(songName4).pipe(response);
 });
-app.get('/musicbox/song5', function(request, response) {
-  response.writeHead(200, {
-      'Content-Type': 'audio/mpeg',
-      'Content-Length': songFile5.size
-  });
-  fs.createReadStream(songName5).pipe(response);
-});
 
 
 
@@ -110,7 +110,7 @@ var onConnect = function(socket) {
   });
 
   socket.on('disconnect', function() {
-    // AKTUALNA LISTA GNIAZDEK
+    // CURRENT SOCKET LIST
 /*     Object.keys(io.sockets.sockets).forEach(function(id) {
       console.log("ID:",id)  // socketId
     }) */

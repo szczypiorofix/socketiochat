@@ -118,7 +118,7 @@ $(function () {
   if (window.location.href.startsWith("http://localhost")) {
     socket = io();
   } else {
-    socket = io.connect('http://node.wroblewskipiotr.pl:80');
+    socket = io.connect('https://chat.wroblewskipiotr.pl:80');
   }
 
   var getParsedDate = function() {

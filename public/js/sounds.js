@@ -6,49 +6,39 @@ function playSound() {
     if (window.location.href.startsWith("http://localhost")) {
       serverType = 'http://localhost/musicbox/';
     } else {
-      serverType = 'http://node.wroblewskipiotr.pl/musicbox/';
+      serverType = 'http://chat.wroblewskipiotr.pl/musicbox/';
     }
 
-    var audioSong1 = serverType+'song1';
-    var audioSong2 = serverType+'song2';
-    var audioSong3 = serverType+'song3';
-    var audioSong4 = serverType+'song4';
-    var audioSong5 = serverType+'song5';
+    var audioSongs = [
+      song0 = serverType+'song0',
+      song1 = serverType+'song1',
+      song2 = serverType+'song2',
+      song3 = serverType+'song3',
+      song4 = serverType+'song4'
+    ];
 
-    var audio = new Audio(audioSong1);
+    var currentSong = -1;
+    var audio = new Audio(audioSongs[currentSong]);
     audio.loop = true;
-    audio.play();
-    var currentSong = 1;
-    console.log('Playing song '+currentSong);
 
     var playSong = function(song) {
-      console.log('Playing song '+song);
+      console.log('Playing song '+audioSongs[song]);
       audio.pause();
-      switch(song) {
-        case 2: {
-          audio = new Audio(audioSong2);
-          break;
-        }
-        case 3: {
-          audio = new Audio(audioSong3);
-          break;
-        }
-        case 4: {
-          audio = new Audio(audioSong4);
-          break;
-        }
-        case 5: {
-          audio = new Audio(audioSong5);
-          break;
-        }
-        default: {
-          audio = new Audio(audioSong1);
-          break;
-        }
-      }
+      audio = new Audio(audioSongs[song]);
       audio.loop = true;
       audio.play();
     };
+
+    $('#song0').click(function() {
+      if (currentSong !== 0) {
+        currentSong = 0;
+        playSong(currentSong);
+      } else {
+        console.log('Song '+currentSong +' paused.');
+        currentSong = 0;
+        audio.pause();
+      }
+    });
 
     $('#song1').click(function() {
       if (currentSong !== 1) {
@@ -86,17 +76,6 @@ function playSound() {
     $('#song4').click(function() {
       if (currentSong !== 4) {
         currentSong = 4;
-        playSong(currentSong);
-      } else {
-        console.log('Song '+currentSong +' paused.');
-        currentSong = 0;
-        audio.pause();
-      }
-    });
-
-    $('#song5').click(function() {
-      if (currentSong !== 5) {
-        currentSong = 5;
         playSong(currentSong);
       } else {
         console.log('Song '+currentSong +' paused.');
